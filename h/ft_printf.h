@@ -26,7 +26,7 @@ typedef struct	s_string
 typedef struct	s_format
 {
 	char			name;
-	void			(*f)(t_string*, va_list*);
+	void			(*func)(t_string*, va_list*);
 }				t_format;
 
 typedef struct	s_meta
@@ -34,6 +34,19 @@ typedef struct	s_meta
 	char			*name;
 	char			*value;
 }				t_meta;
+
+typedef struct	s_opt
+{
+	char			*flags;
+	int				width;
+	int				precision;
+	char			*length;
+	t_format		format;
+}				t_opt;
+
+# define FORMATS	(1)
+# define METAS		(5)
+# define LENGTHS	(6)
 
 /*
 ** ft_printf.c

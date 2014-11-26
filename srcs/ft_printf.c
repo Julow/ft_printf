@@ -20,7 +20,12 @@ t_string		*ft_format(const char *format, ...)
 
 	output = ft_stringnew();
 	va_start(ap, format);
-	formater(output, (char*)format, &ap);
+	if (formater(output, (char*)format, &ap) < 0)
+	{
+		free(output->content);
+		free(output);
+		output = NULL;
+	}
 	va_end(ap);
 	return (output);
 }
@@ -33,10 +38,13 @@ int				ft_printf(const char *format, ...)
 
 	output = ft_stringnew();
 	va_start(ap, format);
-	formater(output, (char*)format, &ap);
+	tmp = -1;
+	if (formater(output, (char*)format, &ap) >= 0)
+	{
+		write(1, output->content, output->length);
+		tmp = output->length;
+	}
 	va_end(ap);
-	write(1, output->content, output->length);
-	tmp = output->length;
 	free(output->content);
 	free(output);
 	return (tmp);
@@ -50,10 +58,13 @@ int				ft_printf_fd(const int fd, const char *format, ...)
 
 	output = ft_stringnew();
 	va_start(ap, format);
-	formater(output, (char*)format, &ap);
+	tmp = -1;
+	if (formater(output, (char*)format, &ap) >= 0)
+	{
+		write(fd, output->content, output->length);
+		tmp = output->length;
+	}
 	va_end(ap);
-	write(fd, output->content, output->length);
-	tmp = output->length;
 	free(output->content);
 	free(output);
 	return (tmp);
