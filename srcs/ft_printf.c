@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
+#include <stdlib.h>
 
 t_string		*ft_format(const char *format, ...)
 {
@@ -20,7 +20,7 @@ t_string		*ft_format(const char *format, ...)
 
 	output = ft_stringnew();
 	va_start(ap, format);
-	formater(output, format, &ap);
+	formater(output, (char*)format, &ap);
 	va_end(ap);
 	return (output);
 }
@@ -33,7 +33,7 @@ int				ft_printf(const char *format, ...)
 
 	output = ft_stringnew();
 	va_start(ap, format);
-	formater(output, format, &ap);
+	formater(output, (char*)format, &ap);
 	va_end(ap);
 	write(1, output->content, output->length);
 	tmp = output->length;
@@ -50,7 +50,7 @@ int				ft_printf_fd(const int fd, const char *format, ...)
 
 	output = ft_stringnew();
 	va_start(ap, format);
-	formater(output, format, &ap);
+	formater(output, (char*)format, &ap);
 	va_end(ap);
 	write(fd, output->content, output->length);
 	tmp = output->length;

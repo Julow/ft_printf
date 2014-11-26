@@ -13,6 +13,9 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# include <stddef.h>
+# include <stdarg.h>
+
 typedef struct	s_string
 {
 	char			*content;
@@ -26,6 +29,12 @@ typedef struct	s_format
 	void			(*f)(t_string*, va_list*);
 }				t_format;
 
+typedef struct	s_meta
+{
+	char			*name;
+	char			*value;
+}				t_meta;
+
 /*
 ** ft_printf.c
 */
@@ -36,13 +45,20 @@ int				ft_printf_fd(const int fd, const char *format, ...);
 /*
 ** formater.c
 */
-void			formater(t_string *out, const char *format, va_list ap);
+void			formater(t_string *out, char *format, va_list *ap);
 
 /*
 ** string.c
 */
 t_string		*ft_stringnew(void);
+char			ft_stringaddl(t_string *str, char *add, int len);
 char			ft_stringext(t_string *str, int need);
+
+/*
+** utils.c
+*/
+int				ft_strlen(const char *str);
+int				ft_strnequ(char const *s1, char const *s2, int n);
 
 /*
 ** flags

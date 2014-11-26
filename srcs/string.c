@@ -29,6 +29,19 @@ t_string		*ft_stringnew(void)
 	return (str);
 }
 
+char			ft_stringaddl(t_string *str, char *add, int len)
+{
+	int				i;
+
+	if (!ft_stringext(str, len))
+		return (0);
+	i = -1;
+	while (++i < len)
+		str->content[str->length + i] = add[i];
+	str->length += len;
+	return (1);
+}
+
 char			ft_stringext(t_string *str, int need)
 {
 	char			*tmp;
