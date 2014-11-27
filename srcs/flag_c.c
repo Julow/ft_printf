@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_n.c                                           :+:      :+:    :+:   */
+/*   flag_c.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/26 15:52:17 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/26 15:52:17 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/11/27 15:27:34 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/11/27 15:27:35 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
+#include <wchar.h>
 
-void			flag_n(t_string *out, t_opt *opt, va_list *ap)
+void			flag_c(t_string *out, t_opt *opt, va_list *ap)
 {
-	int				*n;
+	char			c;
 
-	n = va_arg(*ap, int*);
-	*n = out->length;
-	(void)opt;
+	if (ft_strnequ(opt->length, "l", 1))
+		c = (char)va_arg(*ap, wint_t);
+	else
+		c = (char)va_arg(*ap, int);
+	add_string(out, &c, 1, opt);
 }

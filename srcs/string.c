@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdlib.h>
+#include "ft.h"
 
 t_string		*ft_stringnew(void)
 {
@@ -27,6 +26,32 @@ t_string		*ft_stringnew(void)
 		str->alloc_length = (str->content == NULL) ? 0 : 16;
 	}
 	return (str);
+}
+
+char			ft_stringaddc(t_string *str, char c)
+{
+	if (!ft_stringext(str, 1))
+		return (0);
+	str->content[str->length] = c;
+	str->length++;
+	return (1);
+}
+
+char			ft_stringaddcn(t_string *str, char c, int n)
+{
+	if (!ft_stringext(str, n))
+		return (0);
+	while (n-- > 0)
+	{
+		str->content[str->length] = c;
+		str->length++;
+	}
+	return (1);
+}
+
+char			ft_stringadd(t_string *str, char *add)
+{
+	return (ft_stringaddl(str, add, ft_strlen(add)));
 }
 
 char			ft_stringaddl(t_string *str, char *add, int len)

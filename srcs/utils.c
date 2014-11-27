@@ -10,30 +10,79 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft.h"
 
-int				ft_strlen(const char *str)
+int				ft_isdigit(char c)
 {
-	char			*tmp;
-
-	tmp = (char*)str;
-	while (*tmp != '\0')
-		tmp++;
-	return (tmp - str);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
 
-int				ft_strnequ(char const *s1, char const *s2, int n)
+char			add_string(t_string *out, char *add, int len, t_opt *opt)
+{
+	char			*left;
+
+	left = ft_strchr(opt->flags, '-');
+	if (left == NULL && !ft_stringaddl(out, add, len))
+		return (0);
+	ft_stringaddcn(out, (ft_strchr(opt->flags, '0') == NULL) ? ' ' : '0',
+		opt->width - len);
+	if (left != NULL && !ft_stringaddl(out, add, len))
+		return (0);
+	return (1);
+}
+
+char			add_long(t_string *out, t_long add, t_opt *opt)
 {
 	int				i;
+	int				length;
+	t_long			tmp;
+	char			str[21];
 
-	if (n == 0)
-		return (1);
-	if (s1 == NULL || s2 == NULL)
-		return ((s1 == s2) ? 1 : 0);
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0')
-		i++;
-	if (i >= n)
-		i = n - 1;
-	return ((s1[i] == s2[i]) ? 1 : 0);
+	tmp = add;
+	length = (tmp < 0 || ft_strchr(opt->flags, ' ')
+		|| ft_strchr(opt->flags, '+')) ? 2 : 1;
+	while ((tmp /= 10) != 0)
+		length++;
+	i = length;
+	tmp = add;
+	while (i-- > 0)
+	{
+		str[i] = '0' + ((add < 0) ? -(add % 10) : add % 10);
+		add /= 10;
+	}
+	if (tmp < 0)
+		str[0] = '-';
+	else if (ft_strchr(opt->flags, '+'))
+		str[0] = '+';
+	else if (ft_strchr(opt->flags, ' '))
+		str[0] = ' ';
+	return (add_string(out, str, length, opt));
+}
+
+int				ft_atoin(char *str, int len)
+{
+	int				nb;
+	int				sign;
+
+	sign = 1;
+	nb = 0;
+	if (*str == '-')
+	{
+		sign = -1;
+		str++;
+		len--;
+	}
+	else if (*str == '+')
+	{
+		len--;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9' && len > 0)
+	{
+		len--;
+		nb = nb * 10 + (*(str++) - '0');
+	}
+	return (nb * sign);
 }

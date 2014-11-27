@@ -10,24 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdlib.h>
+#include "ft.h"
 
-t_string		*ft_format(const char *format, ...)
+static int		ft_stringf(t_string *out, char *format, va_list *ap)
 {
-	t_string		*output;
-	va_list			ap;
+	int				i;
+	int				tmp;
 
-	output = ft_stringnew();
-	va_start(ap, format);
-	if (formater(output, (char*)format, &ap) < 0)
+	i = -1;
+	tmp = 0;
+	while (++i >= 0)
 	{
-		free(output->content);
-		free(output);
-		output = NULL;
+		if (format[i] == '%' || format[i] == '{' || format[i] == '\0')
+		{
+			ft_stringaddl(out, format + tmp, i - tmp);
+			tmp = i;
+			if (format[i] == '\0')
+				break ;
+			else if (format[i] == '%')
+				i += parse_format(out, format + i + 1, ap);
+			else if (format[i] == '{')
+				i += parse_meta(out, format + i + 1);
+			if (i < tmp)
+				return (-1);
+			tmp = i + 1;
+		}
 	}
-	va_end(ap);
-	return (output);
+	return (0);
 }
 
 int				ft_printf(const char *format, ...)
@@ -39,7 +48,7 @@ int				ft_printf(const char *format, ...)
 	output = ft_stringnew();
 	va_start(ap, format);
 	tmp = -1;
-	if (formater(output, (char*)format, &ap) >= 0)
+	if (ft_stringf(output, (char*)format, &ap) >= 0)
 	{
 		write(1, output->content, output->length);
 		tmp = output->length;
@@ -59,7 +68,7 @@ int				ft_printf_fd(const int fd, const char *format, ...)
 	output = ft_stringnew();
 	va_start(ap, format);
 	tmp = -1;
-	if (formater(output, (char*)format, &ap) >= 0)
+	if (ft_stringf(output, (char*)format, &ap) >= 0)
 	{
 		write(fd, output->content, output->length);
 		tmp = output->length;
