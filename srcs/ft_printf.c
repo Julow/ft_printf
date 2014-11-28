@@ -17,6 +17,7 @@ static int		ft_stringf(t_string *out, char *format, va_list *ap)
 	int				i;
 	int				tmp;
 
+	ft_stringext(out, ft_strlen(format));
 	i = -1;
 	tmp = 0;
 	while (++i >= 0)
@@ -33,7 +34,7 @@ static int		ft_stringf(t_string *out, char *format, va_list *ap)
 				i += parse_meta(out, format + i + 1);
 			if (i < tmp)
 				return (-1);
-			tmp = i + 1;
+			tmp = i;
 		}
 	}
 	return (0);

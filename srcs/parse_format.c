@@ -98,6 +98,7 @@ static int		parse_length(t_opt *opt, char *format)
 			return (len);
 		}
 	}
+	opt->length = "";
 	return (0);
 }
 
@@ -112,16 +113,23 @@ int				parse_format(t_string *out, char *format, va_list *ap)
 	length += parse_width(&opt, format + length);
 	length += parse_precision(&opt, format + length);
 	length += parse_length(&opt, format + length);
+	ft_putnbr(length);
+	ft_putstr(" : ");
+	ft_putstr(format);
+	ft_putstr("  : ");
 	i = -1;
 	while (++i < FORMATS)
 	{
 		if (g_formats[i].name == format[length])
 		{
+			ft_putchar(g_formats[i].name);
+			ft_putchar('\n');
 			g_formats[i].func(out, &opt, ap);
 			free(opt.flags);
-			return (length + 1);
+			return (length + 2);
 		}
 	}
+	ft_putstr("?\n");
 	free(opt.flags);
 	return (0);
 }

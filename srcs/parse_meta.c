@@ -91,7 +91,7 @@ int				parse_meta(t_string *out, char *format)
 		if (ft_strnequ(format, g_metas[i].name, length))
 		{
 			ft_stringaddl(out, g_metas[i].value, ft_strlen(g_metas[i].value));
-			return (length + 1);
+			return (length + 2);
 		}
 	}
 	return (0);

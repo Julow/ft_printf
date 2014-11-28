@@ -12,13 +12,6 @@
 
 #include "ft.h"
 
-int				ft_isdigit(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
 char			add_string(t_string *out, char *add, int len, t_opt *opt)
 {
 	char			*left;
