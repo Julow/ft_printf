@@ -18,9 +18,9 @@ void			flag_xx(t_string *out, t_opt *opt, va_list *ap)
 	char			*hex;
 
 	if (ft_strnequ(opt->length, "hh", 2))
-		x = (t_long)(va_arg(*ap, unsigned char));
+		x = (t_long)(va_arg(*ap, int));
 	else if (ft_strnequ(opt->length, "h", 1))
-		x = (t_long)(va_arg(*ap, unsigned short));
+		x = (t_long)(va_arg(*ap, int));
 	else if (ft_strnequ(opt->length, "ll", 2))
 		x = (t_long)(va_arg(*ap, unsigned long long));
 	else if (ft_strnequ(opt->length, "l", 1))
@@ -33,7 +33,7 @@ void			flag_xx(t_string *out, t_opt *opt, va_list *ap)
 		x = (t_long)(va_arg(*ap, size_t));
 	else
 		x = (t_long)(va_arg(*ap, unsigned int));
-	hex = itobase(x, "0123456789ABCDEF");
+	hex = ft_itobase(x, "0123456789ABCDEF");
 	add_string(out, hex, ft_strlen(hex), opt);
 	free(hex);
 }

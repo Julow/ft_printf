@@ -18,7 +18,7 @@ void			flag_oo(t_string *out, t_opt *opt, va_list *ap)
 	char			*octal;
 
 	o = (t_long)((unsigned int)(va_arg(*ap, long int)));
-	octal = itobase(o, "01234567");
+	octal = ft_itobase(o, "01234567");
 	add_string(out, octal, ft_strlen(octal), opt);
 	free(octal);
 }

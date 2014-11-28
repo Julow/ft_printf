@@ -17,9 +17,9 @@ void			flag_u(t_string *out, t_opt *opt, va_list *ap)
 	t_long			d;
 
 	if (ft_strnequ(opt->length, "hh", 2))
-		d = (t_long)(va_arg(*ap, unsigned char));
+		d = (t_long)(va_arg(*ap, int));
 	else if (ft_strnequ(opt->length, "h", 1))
-		d = (t_long)(va_arg(*ap, unsigned short));
+		d = (t_long)(va_arg(*ap, int));
 	else if (ft_strnequ(opt->length, "ll", 2))
 		d = (t_long)(va_arg(*ap, unsigned long long));
 	else if (ft_strnequ(opt->length, "l", 1))

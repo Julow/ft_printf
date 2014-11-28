@@ -15,12 +15,12 @@
 /*
 ** sSdDoOuUxXicCn
 ** %%
-** #, ,0,-,+
-** width
-** precision
 ** hh,h,ll,l,j,t,z
 ** =============
 ** p
+** width
+** precision
+** #, ,0,-,+
 ** =============
 ** *,$,L,’
 ** eEfFgGaA

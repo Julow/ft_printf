@@ -40,7 +40,7 @@ char			*ft_itobase(t_long nb, char *base)
 	i = (nb < 0) ? 2 : 1;
 	while ((tmp /= base_len) != 0)
 		i++;
-	str = MAL(char, i);
+	str = (char*)malloc(sizeof(char) * i);
 	str[i] = '\0';
 	tmp = nb;
 	while (--i >= 0)
