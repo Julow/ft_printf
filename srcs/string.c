@@ -49,11 +49,6 @@ char			ft_stringaddcn(t_string *str, char c, int n)
 	return (1);
 }
 
-char			ft_stringadd(t_string *str, char *add)
-{
-	return (ft_stringaddl(str, add, ft_strlen(add)));
-}
-
 char			ft_stringaddl(t_string *str, char *add, int len)
 {
 	int				i;

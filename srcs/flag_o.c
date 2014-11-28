@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_d.c                                           :+:      :+:    :+:   */
+/*   flag_o.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/27 16:24:17 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/27 16:24:18 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/11/28 17:54:49 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/11/28 17:54:49 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-void			flag_d(t_string *out, t_opt *opt, va_list *ap)
+void			flag_o(t_string *out, t_opt *opt, va_list *ap)
 {
-	t_long			d;
+	t_long			o;
+	char			*octal;
 
 	if (ft_strnequ(opt->length, "hh", 2))
-		d = (t_long)(va_arg(*ap, signed char));
+		o = (t_long)(va_arg(*ap, unsigned char));
 	else if (ft_strnequ(opt->length, "h", 1))
-		d = (t_long)(va_arg(*ap, short));
+		o = (t_long)(va_arg(*ap, unsigned short));
 	else if (ft_strnequ(opt->length, "ll", 2))
-		d = (t_long)(va_arg(*ap, long long));
+		o = (t_long)(va_arg(*ap, unsigned long long));
 	else if (ft_strnequ(opt->length, "l", 1))
-		d = (t_long)(va_arg(*ap, long));
+		o = (t_long)(va_arg(*ap, unsigned long));
 	else if (ft_strnequ(opt->length, "j", 1))
-		d = (t_long)(va_arg(*ap, intmax_t));
+		o = (t_long)(va_arg(*ap, uintmax_t));
 	else if (ft_strnequ(opt->length, "t", 1))
-		d = (t_long)(va_arg(*ap, ptrdiff_t));
+		o = (t_long)(va_arg(*ap, ptrdiff_t));
 	else if (ft_strnequ(opt->length, "z", 1))
-		d = (t_long)(va_arg(*ap, size_t));
+		o = (t_long)(va_arg(*ap, size_t));
 	else
-		d = (t_long)(va_arg(*ap, int));
-	add_long(out, d, opt);
+		o = (t_long)(va_arg(*ap, int));
+	octal = itobase(o, "01234567");
+	add_string(out, octal, ft_strlen(octal), opt);
+	free(octal);
 }

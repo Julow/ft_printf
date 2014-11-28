@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define FORMATS	(7)
+# define FORMATS	(9)
 # define METAS		(5)
 
 # define LONG		long long int
@@ -64,6 +64,7 @@ int				parse_meta(t_string *out, char *format);
 
 /*
 ** string.c
+** string2.c
 */
 t_string		*ft_stringnew(void);
 char			ft_stringaddc(t_string *str, char c);
@@ -87,6 +88,14 @@ char			*ft_strsub(char const *s, int start, int len);
 int				ft_strlen(const char *str);
 int				ft_strnequ(char const *s1, char const *s2, int n);
 char			*ft_strchr(const char *s, int c);
+char			*ft_strdup(const char *src);
+
+/*
+** baseutils.c
+*/
+int				ft_strchri(char *str, char c);
+char			*ft_itobase(t_long nb, char *base);
+t_long			ft_basetoi(char *str, char *base);
 
 /*
 ** flags
@@ -96,6 +105,12 @@ void			flag_s(t_string *out, t_opt *opt, va_list *ap);
 void			flag_ss(t_string *out, t_opt *opt, va_list *ap);
 void			flag_d(t_string *out, t_opt *opt, va_list *ap);
 void			flag_dd(t_string *out, t_opt *opt, va_list *ap);
+void			flag_o(t_string *out, t_opt *opt, va_list *ap);
+void			flag_oo(t_string *out, t_opt *opt, va_list *ap);
+void			flag_u(t_string *out, t_opt *opt, va_list *ap);
+void			flag_uu(t_string *out, t_opt *opt, va_list *ap);
+void			flag_x(t_string *out, t_opt *opt, va_list *ap);
+void			flag_xx(t_string *out, t_opt *opt, va_list *ap);
 void			flag_c(t_string *out, t_opt *opt, va_list *ap);
 void			flag_cc(t_string *out, t_opt *opt, va_list *ap);
 void			flag_n(t_string *out, t_opt *opt, va_list *ap);

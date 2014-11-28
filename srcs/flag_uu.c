@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_dd.c                                          :+:      :+:    :+:   */
+/*   flag_uu.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/27 17:53:40 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/27 17:53:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/11/28 18:11:52 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/11/28 18:11:53 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-void			flag_dd(t_string *out, t_opt *opt, va_list *ap)
+void			flag_uu(t_string *out, t_opt *opt, va_list *ap)
 {
 	t_long			d;
 
-	d = (t_long)((int)(va_arg(*ap, long int)));
+	d = (t_long)(va_arg(*ap, unsigned long));
 	add_long(out, d, opt);
 }

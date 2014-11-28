@@ -75,3 +75,21 @@ char			*ft_strchr(const char *s, int c)
 		return (i + (char*)s);
 	return (NULL);
 }
+
+char			*ft_strdup(const char *src)
+{
+	size_t			i;
+	size_t			len;
+	char			*dst;
+
+	len = ft_strlen(src);
+	dst = (char*)malloc(sizeof(char*) * (len + 1));
+	i = 0;
+	while (i < len)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[len] = '\0';
+	return (dst);
+}

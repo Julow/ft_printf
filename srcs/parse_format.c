@@ -13,22 +13,17 @@
 #include "ft.h"
 
 /*
-** sSdDicCn
+** sSdDoOuUxXicCn
 ** %%
 ** #, ,0,-,+
 ** width
 ** precision
 ** hh,h,ll,l,j,t,z
 ** =============
-** sSpdDioOuUxXcC
-** %%
-** #, ,0,-,+
-** width
-** precision
-** hh,h,ll,l,j,z
+** p
 ** =============
 ** *,$,L,’
-** eEfFgGaAn
+** eEfFgGaA
 ** brk
 */
 t_format		g_formats[] = {
@@ -37,6 +32,12 @@ t_format		g_formats[] = {
 	{'S', &flag_ss},
 	{'d', &flag_d},
 	{'D', &flag_dd},
+	{'o', &flag_o},
+	{'O', &flag_oo},
+	{'u', &flag_u},
+	{'U', &flag_uu},
+	{'x', &flag_x},
+	{'X', &flag_xx},
 	{'i', &flag_d},
 	{'c', &flag_c},
 	{'C', &flag_cc},
@@ -100,9 +101,6 @@ static int		parse_length(t_opt *opt, char *format)
 	return (0);
 }
 
-/*
-** %[flags:#, ,0,-,+][width][.precision][length:hh,h,ll,l,j,z]format
-*/
 int				parse_format(t_string *out, char *format, va_list *ap)
 {
 	int				length;
