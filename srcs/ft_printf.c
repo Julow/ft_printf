@@ -13,7 +13,36 @@
 #include "ft.h"
 #include <unistd.h>
 
-static int		ft_stringf(t_string *out, char *format, va_list *ap)
+/*
+** parsef
+** =============
+** Format 'format' using the va_list 'ap'.
+** A format sequence be like:
+**    %[flags][width][.precision]format
+** flags can be 0 or more: '#', ' ', '-', '+', '^', '0', '''
+** width is a positive integer
+** precision is a positive integer or '*', precision start with '.'
+** format can be one of "%sSdDoOuUxXicCnp"
+** The result is added to the t_string 'out'.
+** =============
+** Return FALSE if an error occur or TRUE else.
+** =
+** =
+** ft_printf
+** =============
+** Like parsef but the result is printed to stdout
+** Nothing is printed if parsef return -1
+** =============
+** Return the total of char printed.
+** =
+** =
+** ft_printf_fd
+** =============
+** Like ft_printf but the result is printed to the fd 'fd'
+** =============
+** Return the total of char printed.
+*/
+static int		parsef(t_string *out, char *format, va_list *ap)
 {
 	int				i;
 	int				tmp;
@@ -25,7 +54,6 @@ static int		ft_stringf(t_string *out, char *format, va_list *ap)
 	{
 		if (format[i] == '%' || format[i] == '{' || format[i] == '\0')
 		{
-			ft_stringaddl(out, format + tmp, i - tmp);
 			tmp = i;
 			if (format[i] == '\0')
 				break ;
@@ -34,11 +62,13 @@ static int		ft_stringf(t_string *out, char *format, va_list *ap)
 			else if (format[i] == '{')
 				i += parse_meta(out, format + i + 1);
 			if (i < tmp)
-				return (-1);
+				return (FALSE);
 			tmp = i;
 		}
+		else if (!ft_stringaddc(out, format[i]))
+			return (FALSE);
 	}
-	return (0);
+	return (TRUE);
 }
 
 int				ft_printf(const char *format, ...)
@@ -50,7 +80,7 @@ int				ft_printf(const char *format, ...)
 	output = ft_stringnew();
 	va_start(ap, format);
 	tmp = -1;
-	if (ft_stringf(output, (char*)format, &ap) >= 0)
+	if (parsef(output, (char*)format, &ap))
 	{
 		write(1, output->content, output->length);
 		tmp = output->length;
@@ -70,7 +100,7 @@ int				ft_printf_fd(const int fd, const char *format, ...)
 	output = ft_stringnew();
 	va_start(ap, format);
 	tmp = -1;
-	if (ft_stringf(output, (char*)format, &ap) >= 0)
+	if (parsef(output, (char*)format, &ap))
 	{
 		write(fd, output->content, output->length);
 		tmp = output->length;

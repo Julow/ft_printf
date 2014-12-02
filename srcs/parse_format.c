@@ -15,14 +15,13 @@
 /*
 ** sSdDoOuUxXicCnp
 ** %%
-** 0, ,-,+
+** 0, ,-,+,#,^
 ** width
-** precision
-** hh,h,ll,l,j,t,z,q
+** precision,*
+** hh,h,ll,l,L,j,t,z,q
 ** =============
-** #
 ** =============
-** *,$,L,’
+** $,'
 ** eEfFgGaA
 ** brk
 */
@@ -46,13 +45,30 @@ t_format		g_formats[] = {
 	{'\0', NULL}
 };
 
+char			*g_lengths[] = {
+	"I32",
+	"hh",
+	"h",
+	"ll",
+	"l",
+	"L",
+	"j",
+	"t",
+	"I"
+	"z",
+	"q",
+	"I64",
+	NULL
+};
+
 static int		parse_flags(t_opt *opt, char *format)
 {
 	int				i;
 
 	i = 0;
 	while (format[i] == '#' || format[i] == ' ' || format[i] == '0'
-		|| format[i] == '-' || format[i] == '+' || format[i] == '*')
+		|| format[i] == '-' || format[i] == '+' || format[i] == '\''
+		|| format[i] == '^' || format[i] == ';')
 		i++;
 	opt->flags = ft_strsub(format, 0, i);
 	return (i);
@@ -66,21 +82,31 @@ static int		parse_width(t_opt *opt, char *format)
 	while (ft_isdigit(format[length]))
 		length++;
 	opt->width = ft_atoin(format, length);
+	while (format[length] == ';')
+		length++;
 	return (length);
 }
 
-static int		parse_precision(t_opt *opt, char *format)
+static int		parse_precision(t_opt *opt, char *format, va_list *ap)
 {
 	int				length;
 
-	opt->precision = 0;
+	opt->precision = 6;
 	if (*format != '.')
 		return (0);
 	format++;
 	length = 0;
 	while (ft_isdigit(format[length]))
 		length++;
-	opt->precision = ft_atoin(format, length);
+	if (length > 0)
+		opt->precision = ft_atoin(format, length);
+	else if (format[1] == '*')
+	{
+		opt->precision = (int)(va_arg(*ap, int));
+		length++;
+	}
+	while (format[length] == ';')
+		length++;
 	return (length + 1);
 }
 
@@ -88,15 +114,16 @@ static int		parse_length(t_opt *opt, char *format)
 {
 	int				i;
 	int				len;
-	const char		*lens[] = {"hh", "h", "ll", "l", "j", "t", "z", "q", NULL};
 
 	i = -1;
-	while (lens[++i] != NULL)
+	while (g_lengths[++i] != NULL)
 	{
-		len = ft_strlen(lens[i]);
-		if (ft_strnequ(lens[i], format, len))
+		len = ft_strlen(g_lengths[i]);
+		if (ft_strnequ(g_lengths[i], format, len))
 		{
-			opt->length = lens[i];
+			opt->length = g_lengths[i];
+			while (format[len] == ';')
+				len++;
 			return (len);
 		}
 	}
@@ -113,7 +140,7 @@ int				parse_format(t_string *out, char *format, va_list *ap)
 	length = 0;
 	length += parse_flags(&opt, format + length);
 	length += parse_width(&opt, format + length);
-	length += parse_precision(&opt, format + length);
+	length += parse_precision(&opt, format + length, ap);
 	length += parse_length(&opt, format + length);
 	i = -1;
 	while (g_formats[++i].name != '\0')
@@ -123,7 +150,7 @@ int				parse_format(t_string *out, char *format, va_list *ap)
 			opt.format = g_formats[i].name;
 			g_formats[i].func(out, &opt, ap);
 			free(opt.flags);
-			return (length + 2);
+			return (length + 1);
 		}
 	}
 	free(opt.flags);

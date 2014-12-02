@@ -53,11 +53,16 @@ int				parse_meta(t_string *out, char *format);
 /*
 ** utils.c
 */
-char			add_string(t_string *out, char *add, int len, t_opt *opt);
-char			add_long(t_string *out, t_long add, t_opt *opt);
+t_bool			add_string(t_string *out, char *add, int len, t_opt *opt);
+t_bool			add_long(t_string *out, t_long add, t_opt *opt);
 int				ft_atoin(char *str, int len);
+
+/*
+** argsutils.c
+*/
 t_long			get_arg(t_opt *opt, va_list *ap);
 t_ulong			get_unsigned_arg(t_opt *opt, va_list *ap);
+long double		get_float_arg(t_opt *opt, va_list *ap);
 
 /*
 ** baseutils.c

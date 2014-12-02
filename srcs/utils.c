@@ -11,23 +11,29 @@
 /* ************************************************************************** */
 
 #include "ft.h"
-#include <sys/types.h>
 
-char			add_string(t_string *out, char *add, int len, t_opt *opt)
+t_bool			add_string(t_string *out, char *add, int len, t_opt *opt)
 {
 	char			*left;
+	char			*center;
+	char const		fill = (ft_strchr(opt->flags, '0') == NULL) ? ' ' : '0';
 
-	left = ft_strchr(opt->flags, '-');
-	if (left != NULL && !ft_stringaddl(out, add, len))
-		return (0);
-	ft_stringaddcn(out, (ft_strchr(opt->flags, '0') == NULL) ? ' ' : '0',
-		opt->width - len);
-	if (left == NULL && !ft_stringaddl(out, add, len))
-		return (0);
-	return (1);
+	left = ft_strrchr(opt->flags, '-');
+	center = ft_strrchr(opt->flags, '^');
+	center = (center > left) ? center : NULL;
+	left = (left > center) ? left : NULL;
+	if ((left == NULL || center != NULL) && !ft_stringaddcn(out, fill,
+		(center != NULL) ? (opt->width - len) / 2 : opt->width - len))
+		return (FALSE);
+	if (!ft_stringaddl(out, add, len))
+		return (FALSE);
+	if ((left != NULL || center != NULL) && !ft_stringaddcn(out, fill,
+		(center != NULL) ? (opt->width - len) / 2 : opt->width - len))
+		return (FALSE);
+	return (TRUE);
 }
 
-char			add_long(t_string *out, t_long add, t_opt *opt)
+t_bool			add_long(t_string *out, t_long add, t_opt *opt)
 {
 	int				i;
 	int				length;
@@ -79,46 +85,4 @@ int				ft_atoin(char *str, int len)
 		nb = nb * 10 + (*(str++) - '0');
 	}
 	return (nb * sign);
-}
-
-t_long			get_arg(t_opt *opt, va_list *ap)
-{
-	if (ft_strequ(opt->length, "hh"))
-		return ((t_long)(va_arg(*ap, int)));
-	if (ft_strequ(opt->length, "h"))
-		return ((t_long)(va_arg(*ap, int)));
-	if (ft_strequ(opt->length, "ll"))
-		return ((t_long)(va_arg(*ap, long long)));
-	if (ft_strequ(opt->length, "l"))
-		return ((t_long)(va_arg(*ap, long)));
-	if (ft_strequ(opt->length, "j"))
-		return ((t_long)(va_arg(*ap, intmax_t)));
-	if (ft_strequ(opt->length, "t"))
-		return ((t_long)(va_arg(*ap, ptrdiff_t)));
-	if (ft_strequ(opt->length, "z"))
-		return ((t_long)(va_arg(*ap, size_t)));
-	if (ft_strequ(opt->length, "q"))
-		return ((t_long)(va_arg(*ap, quad_t)));
-	return ((t_long)(va_arg(*ap, int)));
-}
-
-t_ulong			get_unsigned_arg(t_opt *opt, va_list *ap)
-{
-	if (ft_strequ(opt->length, "hh"))
-		return ((t_long)(va_arg(*ap, int)));
-	if (ft_strequ(opt->length, "h"))
-		return ((t_long)(va_arg(*ap, int)));
-	if (ft_strequ(opt->length, "ll"))
-		return ((t_long)(va_arg(*ap, unsigned long long)));
-	if (ft_strequ(opt->length, "l"))
-		return ((t_long)(va_arg(*ap, unsigned long)));
-	if (ft_strequ(opt->length, "j"))
-		return ((t_long)(va_arg(*ap, uintmax_t)));
-	if (ft_strequ(opt->length, "t"))
-		return ((t_long)(va_arg(*ap, ptrdiff_t)));
-	if (ft_strequ(opt->length, "z"))
-		return ((t_long)(va_arg(*ap, size_t)));
-	if (ft_strequ(opt->length, "q"))
-		return ((t_long)(va_arg(*ap, u_quad_t)));
-	return ((t_long)(va_arg(*ap, unsigned int)));
 }

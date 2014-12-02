@@ -15,6 +15,7 @@
 
 /*
 ** t_string		*ft_format(const char *format, ...);
+** t_bool		ft_stringf(t_string *str, const char *format, ...);
 */
 int				ft_printf(const char *format, ...);
 int				ft_printf_fd(const int fd, const char *format, ...);
