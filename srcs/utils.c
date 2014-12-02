@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft.h"
+#include <sys/types.h>
 
 char			add_string(t_string *out, char *add, int len, t_opt *opt)
 {
@@ -78,4 +79,46 @@ int				ft_atoin(char *str, int len)
 		nb = nb * 10 + (*(str++) - '0');
 	}
 	return (nb * sign);
+}
+
+t_long			get_arg(t_opt *opt, va_list *ap)
+{
+	if (ft_strequ(opt->length, "hh"))
+		return ((t_long)(va_arg(*ap, int)));
+	if (ft_strequ(opt->length, "h"))
+		return ((t_long)(va_arg(*ap, int)));
+	if (ft_strequ(opt->length, "ll"))
+		return ((t_long)(va_arg(*ap, long long)));
+	if (ft_strequ(opt->length, "l"))
+		return ((t_long)(va_arg(*ap, long)));
+	if (ft_strequ(opt->length, "j"))
+		return ((t_long)(va_arg(*ap, intmax_t)));
+	if (ft_strequ(opt->length, "t"))
+		return ((t_long)(va_arg(*ap, ptrdiff_t)));
+	if (ft_strequ(opt->length, "z"))
+		return ((t_long)(va_arg(*ap, size_t)));
+	if (ft_strequ(opt->length, "q"))
+		return ((t_long)(va_arg(*ap, quad_t)));
+	return ((t_long)(va_arg(*ap, int)));
+}
+
+t_ulong			get_unsigned_arg(t_opt *opt, va_list *ap)
+{
+	if (ft_strequ(opt->length, "hh"))
+		return ((t_long)(va_arg(*ap, int)));
+	if (ft_strequ(opt->length, "h"))
+		return ((t_long)(va_arg(*ap, int)));
+	if (ft_strequ(opt->length, "ll"))
+		return ((t_long)(va_arg(*ap, unsigned long long)));
+	if (ft_strequ(opt->length, "l"))
+		return ((t_long)(va_arg(*ap, unsigned long)));
+	if (ft_strequ(opt->length, "j"))
+		return ((t_long)(va_arg(*ap, uintmax_t)));
+	if (ft_strequ(opt->length, "t"))
+		return ((t_long)(va_arg(*ap, ptrdiff_t)));
+	if (ft_strequ(opt->length, "z"))
+		return ((t_long)(va_arg(*ap, size_t)));
+	if (ft_strequ(opt->length, "q"))
+		return ((t_long)(va_arg(*ap, u_quad_t)));
+	return ((t_long)(va_arg(*ap, unsigned int)));
 }

@@ -13,14 +13,14 @@
 #include "ft.h"
 
 /*
-** sSdDoOuUxXicCn
+** sSdDoOuUxXicCnp
 ** %%
-** hh,h,ll,l,j,t,z
-** =============
-** p
+** 0, ,-,+
 ** width
 ** precision
-** #, ,0,-,+
+** hh,h,ll,l,j,t,z,q
+** =============
+** #
 ** =============
 ** *,$,L,’
 ** eEfFgGaA
@@ -41,7 +41,8 @@ t_format		g_formats[] = {
 	{'i', &flag_d},
 	{'c', &flag_c},
 	{'C', &flag_cc},
-	{'n', &flag_n}
+	{'n', &flag_n},
+	{'\0', NULL}
 };
 
 static int		parse_flags(t_opt *opt, char *format)
@@ -86,15 +87,15 @@ static int		parse_length(t_opt *opt, char *format)
 {
 	int				i;
 	int				len;
-	const char		*lengths[] = {"hh", "h", "ll", "l", "j", "t", "z", NULL};
+	const char		*lens[] = {"hh", "h", "ll", "l", "j", "t", "z", "q", NULL};
 
 	i = -1;
-	while (lengths[++i] != NULL)
+	while (lens[++i] != NULL)
 	{
-		len = ft_strlen(lengths[i]);
-		if (ft_strnequ(lengths[i], format, len))
+		len = ft_strlen(lens[i]);
+		if (ft_strnequ(lens[i], format, len))
 		{
-			opt->length = lengths[i];
+			opt->length = lens[i];
 			return (len);
 		}
 	}
@@ -113,23 +114,17 @@ int				parse_format(t_string *out, char *format, va_list *ap)
 	length += parse_width(&opt, format + length);
 	length += parse_precision(&opt, format + length);
 	length += parse_length(&opt, format + length);
-	ft_putnbr(length);
-	ft_putstr(" : ");
-	ft_putstr(format);
-	ft_putstr("  : ");
 	i = -1;
-	while (++i < FORMATS)
+	while (g_formats[++i].name != '\0')
 	{
 		if (g_formats[i].name == format[length])
 		{
-			ft_putchar(g_formats[i].name);
-			ft_putchar('\n');
+			opt.format = g_formats[i].name;
 			g_formats[i].func(out, &opt, ap);
 			free(opt.flags);
 			return (length + 2);
 		}
 	}
-	ft_putstr("?\n");
 	free(opt.flags);
 	return (0);
 }

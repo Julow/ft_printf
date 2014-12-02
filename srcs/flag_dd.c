@@ -14,8 +14,5 @@
 
 void			flag_dd(t_string *out, t_opt *opt, va_list *ap)
 {
-	t_long			d;
-
-	d = (t_long)((int)(va_arg(*ap, long int)));
-	add_long(out, d, opt);
+	add_long(out, (t_long)((int)(va_arg(*ap, long int))), opt);
 }

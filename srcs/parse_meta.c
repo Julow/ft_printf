@@ -75,6 +75,7 @@ t_meta			g_metas[] = {
 	{"n", "\033[4m"},
 	{"o", "\033[2m"},
 	{"r", "\033[0;0m"},
+	{NULL, NULL},
 };
 
 int				parse_meta(t_string *out, char *format)
@@ -86,7 +87,7 @@ int				parse_meta(t_string *out, char *format)
 	while (format[length] != '}' && format[length] != '\0')
 		length++;
 	i = -1;
-	while (++i < METAS)
+	while (g_metas[++i].name != NULL)
 	{
 		if (ft_strnequ(format, g_metas[i].name, length))
 		{

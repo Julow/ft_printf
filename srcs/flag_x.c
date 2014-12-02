@@ -14,26 +14,20 @@
 
 void			flag_x(t_string *out, t_opt *opt, va_list *ap)
 {
-	t_long			x;
 	char			*hex;
+	t_long			x;
+	t_string		*tmp;
 
-	if (ft_strnequ(opt->length, "hh", 2))
-		x = (t_long)(va_arg(*ap, int));
-	else if (ft_strnequ(opt->length, "h", 1))
-		x = (t_long)(va_arg(*ap, int));
-	else if (ft_strnequ(opt->length, "ll", 2))
-		x = (t_long)(va_arg(*ap, unsigned long long));
-	else if (ft_strnequ(opt->length, "l", 1))
-		x = (t_long)(va_arg(*ap, unsigned long));
-	else if (ft_strnequ(opt->length, "j", 1))
-		x = (t_long)(va_arg(*ap, uintmax_t));
-	else if (ft_strnequ(opt->length, "t", 1))
-		x = (t_long)(va_arg(*ap, ptrdiff_t));
-	else if (ft_strnequ(opt->length, "z", 1))
-		x = (t_long)(va_arg(*ap, size_t));
-	else
-		x = (t_long)(va_arg(*ap, unsigned int));
+	x = get_unsigned_arg(opt, ap);
 	hex = ft_itobase(x, "0123456789abcdef");
-	add_string(out, hex, ft_strlen(hex), opt);
+	if (ft_strchr(opt->flags, '#') && x > 0)
+	{
+		tmp = ft_stringnews("0x");
+		ft_stringadd(tmp, hex);
+		add_string(out, tmp->content, tmp->length, opt);
+		ft_stringkil(tmp);
+	}
+	else
+		add_string(out, hex, ft_strlen(hex), opt);
 	free(hex);
 }

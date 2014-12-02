@@ -14,18 +14,15 @@
 # define FT_H
 
 # include "libft.h"
-#     include "../ft_printf.h"
 
 # include <stddef.h>
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
 
-# define FORMATS	(15)
-# define METAS		(65)
-
 typedef struct	s_opt
 {
+	char			format;
 	char			*flags;
 	int				width;
 	int				precision;
@@ -60,6 +57,8 @@ int				parse_meta(t_string *out, char *format);
 char			add_string(t_string *out, char *add, int len, t_opt *opt);
 char			add_long(t_string *out, t_long add, t_opt *opt);
 int				ft_atoin(char *str, int len);
+t_long			get_arg(t_opt *opt, va_list *ap);
+t_ulong			get_unsigned_arg(t_opt *opt, va_list *ap);
 
 /*
 ** baseutils.c
