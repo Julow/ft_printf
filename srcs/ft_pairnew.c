@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*   ft_pairnew.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 17:36:46 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/04 17:36:47 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/01 13:15:15 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/01 13:15:16 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-void			ft_putendl(char *s)
+t_pair			*ft_pairnew(char *key, void *value)
 {
-	ft_putendl_fd(s, 1);
+	t_pair			*pair;
+
+	pair = MAL1(t_pair);
+	pair->key = ft_stringnew();
+	if (!ft_stringadd(pair->key, key))
+	{
+		ft_stringkil(pair->key);
+		free(pair);
+		return (NULL);
+	}
+	pair->value = value;
+	return (pair);
 }

@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*   ft_isnumber.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 17:36:46 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/04 17:36:47 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/11/29 17:53:38 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/11/29 17:53:39 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			ft_putendl(char *s)
+t_bool			ft_isnumber(const char *str)
 {
-	ft_putendl_fd(s, 1);
+	while (ft_iswhite(*str))
+		str++;
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str >= '0' && *str <= '9')
+		str++;
+	if (*str == '.' || *str == ',')
+		str++;
+	while (*str >= '0' && *str <= '9')
+		str++;
+	while (ft_iswhite(*str))
+		str++;
+	return (*str == '\0') ? TRUE : FALSE;
 }

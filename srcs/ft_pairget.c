@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*   ft_pairget.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 17:36:46 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/04 17:36:47 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/01 13:16:11 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/01 13:16:13 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			ft_putendl(char *s)
+t_pair			*ft_pairget(t_array *array, char *key)
 {
-	ft_putendl_fd(s, 1);
+	int				i;
+	t_pair			*tmp;
+
+	i = -1;
+	while (++i < array->length)
+	{
+		tmp = (t_pair*)(array->data[i]);
+		if (ft_strequ(key, tmp->key->content))
+			return (tmp);
+	}
+	return (NULL);
 }
