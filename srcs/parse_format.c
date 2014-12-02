@@ -42,6 +42,7 @@ t_format		g_formats[] = {
 	{'c', &flag_c},
 	{'C', &flag_cc},
 	{'n', &flag_n},
+	{'p', &flag_p},
 	{'\0', NULL}
 };
 
@@ -51,7 +52,7 @@ static int		parse_flags(t_opt *opt, char *format)
 
 	i = 0;
 	while (format[i] == '#' || format[i] == ' ' || format[i] == '0'
-		|| format[i] == '-' || format[i] == '+')
+		|| format[i] == '-' || format[i] == '+' || format[i] == '*')
 		i++;
 	opt->flags = ft_strsub(format, 0, i);
 	return (i);

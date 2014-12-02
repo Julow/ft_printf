@@ -18,7 +18,6 @@
 # include <stddef.h>
 # include <stdarg.h>
 # include <stdlib.h>
-# include <unistd.h>
 
 typedef struct	s_opt
 {
@@ -84,5 +83,6 @@ void			flag_xx(t_string *out, t_opt *opt, va_list *ap);
 void			flag_c(t_string *out, t_opt *opt, va_list *ap);
 void			flag_cc(t_string *out, t_opt *opt, va_list *ap);
 void			flag_n(t_string *out, t_opt *opt, va_list *ap);
+void			flag_p(t_string *out, t_opt *opt, va_list *ap);
 
 #endif

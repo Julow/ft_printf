@@ -18,6 +18,7 @@ O_DIR = o/
 LIBFT = libft/
 
 FLAGS = -Wall -Wextra -Werror -O2
+DEBUG = 0
 
 C_FILES = $(shell ls -1 $(C_DIR) | grep "\.c")
 
@@ -35,7 +36,7 @@ $(NAME): libs $(O_FILES)
 	@ranlib $@
 
 libs:
-	@(make -C $(LIBFT) || (echo "\033[0;31m$(LIBFT)\033[0;0m" && exit 1)) | grep -v "Nothing to be done" || echo "" > /dev/null
+	@(if [ "$(DEBUG)" -eq "1" ]; then make -C $(LIBFT) debug; else make -C $(LIBFT); fi || (echo "\033[0;31m$(LIBFT)\033[0;0m" && exit 1)) | grep -v "Nothing to be done" || echo "" > /dev/null
 
 $(O_DIR)%.o: $(C_DIR)%.c
 	@mkdir $(O_DIR) 2> /dev/null || echo "" > /dev/null
@@ -50,9 +51,17 @@ fclean: clean
 	@rm $(NAME) 2> /dev/null || echo "" > /dev/null
 	@make -C $(LIBFT) fclean
 
+debug: _debug all
+
+rebug: fclean debug
+
+_debug:
+	$(eval FLAGS = -Wall -Wextra -g)
+	$(eval DEBUG = 1)
+
 update: fclean
 	@git subtree pull --prefix=libft --squash ../libft master -m "Update libft"
 
 re: fclean all
 
-.PHONY: all libs clean fclean update re
+.PHONY: all libs clean fclean debug rebug _debug update re

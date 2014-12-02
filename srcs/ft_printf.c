@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft.h"
+#include <unistd.h>
 
 static int		ft_stringf(t_string *out, char *format, va_list *ap)
 {

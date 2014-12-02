@@ -18,11 +18,11 @@ char			add_string(t_string *out, char *add, int len, t_opt *opt)
 	char			*left;
 
 	left = ft_strchr(opt->flags, '-');
-	if (left == NULL && !ft_stringaddl(out, add, len))
+	if (left != NULL && !ft_stringaddl(out, add, len))
 		return (0);
 	ft_stringaddcn(out, (ft_strchr(opt->flags, '0') == NULL) ? ' ' : '0',
 		opt->width - len);
-	if (left != NULL && !ft_stringaddl(out, add, len))
+	if (left == NULL && !ft_stringaddl(out, add, len))
 		return (0);
 	return (1);
 }

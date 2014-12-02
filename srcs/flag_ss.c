@@ -15,7 +15,14 @@
 void			flag_ss(t_string *out, t_opt *opt, va_list *ap)
 {
 	char			*str;
+	int				length;
 
 	str = (char*)va_arg(*ap, wchar_t*);
-	add_string(out, str, ft_strlen(str), opt);
+	if (str == NULL)
+		str = "(null)";
+	length = -1;
+	while (str[++length] != '\0')
+		if (str[length] < 0)
+			str[length] = '?';
+	add_string(out, str, length, opt);
 }
