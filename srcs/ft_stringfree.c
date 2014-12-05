@@ -15,19 +15,15 @@
 
 /*
 ** Free unused memory
-** =============
-** Return FALSE(0) if the malloc fail, TRUE(1) otherwise
 */
-t_bool			ft_stringfree(t_string *str)
+void			ft_stringfree(t_string *str)
 {
 	char			*tmp;
 	int				i;
 
 	if (str->length >= str->alloc_length)
-		return (TRUE);
+		return ;
 	tmp = MAL(char, str->length);
-	if (tmp == NULL)
-		return (FALSE);
 	str->alloc_length = str->length;
 	if (str->content != NULL)
 	{
@@ -37,5 +33,4 @@ t_bool			ft_stringfree(t_string *str)
 		free(str->content);
 	}
 	str->content = tmp;
-	return (TRUE);
 }

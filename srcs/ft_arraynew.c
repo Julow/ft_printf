@@ -20,9 +20,9 @@ t_array			*ft_arraynew(void)
 	array = MAL1(t_array);
 	if (array != NULL)
 	{
-		array->data = MAL(void*, 0);
+		array->data = MAL(void*, 16);
 		array->length = 0;
-		array->alloc_length = 0;
+		array->alloc_length = 16;
 	}
 	return (array);
 }

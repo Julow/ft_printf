@@ -19,12 +19,7 @@ t_pair			*ft_pairnew(char *key, void *value)
 
 	pair = MAL1(t_pair);
 	pair->key = ft_stringnew();
-	if (!ft_stringadd(pair->key, key))
-	{
-		ft_stringkil(pair->key);
-		free(pair);
-		return (NULL);
-	}
+	ft_stringadd(pair->key, key);
 	pair->value = value;
 	return (pair);
 }
