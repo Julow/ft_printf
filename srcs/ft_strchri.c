@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnchar.c                                      :+:      :+:    :+:   */
+/*   srcs/ft_strchri.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/01 13:40:20 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/01 13:40:21 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/07 15:26:33 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/07 15:26:33 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			ft_putnchar(char c, int n)
+int				ft_strchri(char *str, char c)
 {
-	ft_putnchar_fd(c, n, 1);
+	char			*tmp;
+
+	tmp = str;
+	while (*tmp != c)
+	{
+		if (*tmp == '\0')
+			return (-1);
+		tmp++;
+	}
+	return (tmp - str);
 }

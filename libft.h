@@ -15,13 +15,13 @@
 
 # include <stddef.h>
 
-# define MAL(t,l)	((t*)malloc(sizeof(t) * (l)))
-# define MAL1(t)	((t*)malloc(sizeof(t)))
+# define MAL(t,l)	((t*)ft_malloc(sizeof(t) * (l)))
+# define MAL1(t)	((t*)ft_malloc(sizeof(t)))
 
-# define UCHAR	unsigned char
-# define UINT	unsigned int
-# define LONG	long long int
-# define ULONG	unsigned long long int
+# define UCHAR		unsigned char
+# define UINT		unsigned int
+# define LONG		long long int
+# define ULONG		unsigned long long int
 
 typedef char	t_bool;
 typedef UCHAR	t_uchar;
@@ -62,6 +62,8 @@ typedef struct	s_pair
 /*
 ** Memory
 */
+void			*ft_malloc(t_uint size);
+
 void			ft_bzero(void *s, size_t n);
 void			*ft_memset(void *b, int c, size_t len);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
@@ -83,6 +85,7 @@ char			*ft_strdup(const char *src);
 char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strncpy(char *dst, const char *src, size_t len);
 char			*ft_strchr(const char *s, int c);
+int				ft_strchri(char *str, char c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strstr(const char *s1, const char *s2);
 char			*ft_strnstr(const char *s1, const char *s2, size_t n);
@@ -97,11 +100,11 @@ char			**ft_strsplit(char const *s, char c);
 
 void			ft_strnadd(char **str, char const *add, size_t len);
 
-int				ft_isalpha(int c);
-int				ft_isdigit(int c);
-int				ft_isalnum(int c);
-int				ft_isascii(int c);
-int				ft_isprint(int c);
+t_bool			ft_isalpha(char c);
+t_bool			ft_isdigit(char c);
+t_bool			ft_isalnum(char c);
+t_bool			ft_isascii(char c);
+t_bool			ft_isprint(char c);
 t_bool			ft_isspace(char c);
 t_bool			ft_iswhite(char c);
 
@@ -200,6 +203,7 @@ t_string		*ft_stringdup(t_string *str);
 t_string		*ft_stringsub(t_string *str, int index, int len);
 void			ft_stringrem(t_string *str, int index, int len);
 void			ft_stringtrim(t_string *str);
+void			ft_stringtrimc(t_string *str, char *trim);
 t_array			*ft_stringsplit(t_string *str, char *chr);
 t_array			*ft_stringsplitc(t_string *str, char c);
 int				ft_stringchr(t_string *str, char c);
