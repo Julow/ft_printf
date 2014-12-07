@@ -17,6 +17,8 @@ C_DIR = srcs/
 O_DIR = o/
 LIBFT = libft/
 
+TMP_FILE = $(O_DIR)tmp_file
+
 FLAGS = -Wall -Wextra -Werror -O2
 DEBUG = 0
 
@@ -24,20 +26,19 @@ C_FILES = $(shell ls -1 $(C_DIR) | grep "\.c")
 
 O_FILES = $(addprefix $(O_DIR),$(C_FILES:.c=.o))
 
-LIBFT_C = $(shell ls -1 $(LIBFT)srcs | grep "\.c")
-
-LIBFT_O = $(addprefix $(LIBFT)o/,$(LIBFT_C:.c=.o))
-
-all: libs
+all:
+	@(if [ "$(DEBUG)" -eq "1" ]; then make -C $(LIBFT) debug; else make -C $(LIBFT); fi || (echo "\033[0;31m$(LIBFT)\033[0;0m" && exit 1)) | grep -v "Nothing to be done" || echo "" > /dev/null
 	@make -j5 $(NAME)
 
 $(NAME): $(O_FILES)
-	@ar rc $@ $(O_FILES) $(LIBFT_O) && printf "\033[0;32m" || printf "\033[0;31m"
+	@echo "CREATE $@" > $(TMP_FILE)
+	@echo "CLEAR" >> $(TMP_FILE)
+	@echo "ADDMOD $(O_FILES)" >> $(TMP_FILE)
+	@echo "ADDLIB $(LIBFT)libft.a" >> $(TMP_FILE)
+	@echo "SAVE" >> $(TMP_FILE)
+	@echo "END" >> $(TMP_FILE)
+	@(cat $(TMP_FILE) | ar sM) && printf "\033[0;32m" || printf "\033[0;31m"
 	@printf "%-24s\033[1;30m<<--\033[0;0m\n" "$@"
-	@ranlib $@
-
-libs:
-	@(if [ "$(DEBUG)" -eq "1" ]; then make -C $(LIBFT) debug; else make -C $(LIBFT); fi || (echo "\033[0;31m$(LIBFT)\033[0;0m" && exit 1)) | grep -v "Nothing to be done" || echo "" > /dev/null
 
 $(O_DIR)%.o: $(C_DIR)%.c
 	@mkdir $(O_DIR) 2> /dev/null || echo "" > /dev/null
@@ -45,6 +46,7 @@ $(O_DIR)%.o: $(C_DIR)%.c
 
 clean:
 	@rm $(O_FILES) 2> /dev/null || echo "" > /dev/null
+	@rm $(TMP_FILE) 2> /dev/null || echo "" > /dev/null
 	@rmdir $(O_DIR) 2> /dev/null || echo "" > /dev/null
 	@make -C $(LIBFT) clean
 
@@ -65,4 +67,4 @@ update: fclean
 
 re: fclean all
 
-.PHONY: all libs clean fclean debug rebug _debug update re
+.PHONY: all clean fclean debug rebug _debug update re
