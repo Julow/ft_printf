@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft.h"
-#include <unistd.h>
 
 /*
 ** parsef
@@ -42,7 +41,7 @@
 ** =============
 ** Return the total of char printed.
 */
-static int		parsef(t_string *out, char *format, va_list *ap)
+static t_bool	parsef(t_string *out, char *format, va_list *ap)
 {
 	int				i;
 	int				tmp;
@@ -65,8 +64,7 @@ static int		parsef(t_string *out, char *format, va_list *ap)
 				return (FALSE);
 			tmp = i;
 		}
-		else if (!ft_stringaddc(out, format[i]))
-			return (FALSE);
+		ft_stringaddc(out, format[i]);
 	}
 	return (TRUE);
 }
@@ -82,12 +80,11 @@ int				ft_printf(const char *format, ...)
 	tmp = -1;
 	if (parsef(output, (char*)format, &ap))
 	{
-		write(1, output->content, output->length);
+		ft_stringput(output);
 		tmp = output->length;
 	}
 	va_end(ap);
-	free(output->content);
-	free(output);
+	ft_stringkil(output);
 	return (tmp);
 }
 
@@ -102,11 +99,10 @@ int				ft_printf_fd(const int fd, const char *format, ...)
 	tmp = -1;
 	if (parsef(output, (char*)format, &ap))
 	{
-		write(fd, output->content, output->length);
+		ft_stringputfd(output, fd);
 		tmp = output->length;
 	}
 	va_end(ap);
-	free(output->content);
-	free(output);
+	ft_stringkil(output);
 	return (tmp);
 }

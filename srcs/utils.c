@@ -12,7 +12,7 @@
 
 #include "ft.h"
 
-t_bool			add_string(t_string *out, char *add, int len, t_opt *opt)
+void			add_string(t_string *out, char *add, int len, t_opt *opt)
 {
 	char			*left;
 	char			*center;
@@ -22,18 +22,16 @@ t_bool			add_string(t_string *out, char *add, int len, t_opt *opt)
 	center = ft_strrchr(opt->flags, '^');
 	center = (center > left) ? center : NULL;
 	left = (left > center) ? left : NULL;
-	if ((left == NULL || center != NULL) && !ft_stringaddcn(out, fill,
-		(center != NULL) ? (opt->width - len) / 2 : opt->width - len))
-		return (FALSE);
-	if (!ft_stringaddl(out, add, len))
-		return (FALSE);
-	if ((left != NULL || center != NULL) && !ft_stringaddcn(out, fill,
-		(center != NULL) ? (opt->width - len) / 2 : opt->width - len))
-		return (FALSE);
-	return (TRUE);
+	if (left == NULL || center != NULL)
+		ft_stringaddcn(out, fill, (center != NULL) ? (opt->width - len) / 2 :
+			opt->width - len);
+	ft_stringaddl(out, add, len);
+	if (left != NULL || center != NULL)
+		ft_stringaddcn(out, fill, (center != NULL) ? (opt->width - len) / 2 :
+			opt->width - len);
 }
 
-t_bool			add_long(t_string *out, t_long add, t_opt *opt)
+void			add_long(t_string *out, t_long add, t_opt *opt)
 {
 	int				i;
 	int				length;
@@ -58,7 +56,7 @@ t_bool			add_long(t_string *out, t_long add, t_opt *opt)
 		str[0] = '+';
 	else if (ft_strchr(opt->flags, ' '))
 		str[0] = ' ';
-	return (add_string(out, str, length, opt));
+	add_string(out, str, length, opt);
 }
 
 int				ft_atoin(char *str, int len)
@@ -79,10 +77,7 @@ int				ft_atoin(char *str, int len)
 		len--;
 		str++;
 	}
-	while (*str >= '0' && *str <= '9' && len > 0)
-	{
-		len--;
+	while (*str >= '0' && *str <= '9' && len-- > 0)
 		nb = nb * 10 + (*(str++) - '0');
-	}
 	return (nb * sign);
 }

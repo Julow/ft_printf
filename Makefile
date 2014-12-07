@@ -28,9 +28,10 @@ LIBFT_C = $(shell ls -1 $(LIBFT)srcs | grep "\.c")
 
 LIBFT_O = $(addprefix $(LIBFT)o/,$(LIBFT_C:.c=.o))
 
-all: $(NAME)
+all: libs
+	@make -j5 $(NAME)
 
-$(NAME): libs $(O_FILES)
+$(NAME): $(O_FILES)
 	@ar rc $@ $(O_FILES) $(LIBFT_O) && printf "\033[0;32m" || printf "\033[0;31m"
 	@printf "%-24s\033[1;30m<<--\033[0;0m\n" "$@"
 	@ranlib $@

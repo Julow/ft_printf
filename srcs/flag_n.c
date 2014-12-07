@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft.h"
-#include <sys/types.h>
 
 void			flag_n(t_string *out, t_opt *opt, va_list *ap)
 {

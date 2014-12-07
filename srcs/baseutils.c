@@ -12,20 +12,6 @@
 
 #include "ft.h"
 
-int				ft_strchri(char *str, char c)
-{
-	char			*tmp;
-
-	tmp = str;
-	while (*tmp != c)
-	{
-		if (*tmp == '\0')
-			return (-1);
-		tmp++;
-	}
-	return (tmp - str);
-}
-
 char			*ft_itobase(t_long nb, char *base)
 {
 	int				base_len;
@@ -40,7 +26,7 @@ char			*ft_itobase(t_long nb, char *base)
 	i = (nb < 0) ? 2 : 1;
 	while ((tmp /= base_len) != 0)
 		i++;
-	str = (char*)malloc(sizeof(char) * i);
+	str = MAL(char, i);
 	str[i] = '\0';
 	tmp = nb;
 	while (--i >= 0)

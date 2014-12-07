@@ -18,6 +18,9 @@
 # include <stddef.h>
 # include <stdarg.h>
 # include <stdlib.h>
+# include <wchar.h>
+# include <sys/types.h>
+# include <inttypes.h>
 
 typedef struct	s_opt
 {
@@ -53,8 +56,8 @@ int				parse_meta(t_string *out, char *format);
 /*
 ** utils.c
 */
-t_bool			add_string(t_string *out, char *add, int len, t_opt *opt);
-t_bool			add_long(t_string *out, t_long add, t_opt *opt);
+void			add_string(t_string *out, char *add, int len, t_opt *opt);
+void			add_long(t_string *out, t_long add, t_opt *opt);
 int				ft_atoin(char *str, int len);
 
 /*
@@ -67,7 +70,6 @@ long double		get_float_arg(t_opt *opt, va_list *ap);
 /*
 ** baseutils.c
 */
-int				ft_strchri(char *str, char c);
 char			*ft_itobase(t_long nb, char *base);
 t_long			ft_basetoi(char *str, char *base);
 
