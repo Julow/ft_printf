@@ -17,8 +17,6 @@ C_DIR = srcs/
 O_DIR = o/
 LIBFT = libft/
 
-TMP_FILE = $(O_DIR)tmp_file
-
 FLAGS = -Wall -Wextra -Werror -O2
 DEBUG = 0
 
@@ -31,13 +29,8 @@ all:
 	@make -j5 $(NAME)
 
 $(NAME): $(O_FILES)
-	@echo "CREATE $@" > $(TMP_FILE)
-	@echo "CLEAR" >> $(TMP_FILE)
-	@echo "ADDMOD $(O_FILES)" >> $(TMP_FILE)
-	@echo "ADDLIB $(LIBFT)libft.a" >> $(TMP_FILE)
-	@echo "SAVE" >> $(TMP_FILE)
-	@echo "END" >> $(TMP_FILE)
-	@(cat $(TMP_FILE) | ar sM) && printf "\033[0;32m" || printf "\033[0;31m"
+	$(eval LIBFT_O = $(addprefix $(LIBFT)o/,$(shell ls -1 $(LIBFT)o | grep "\.o")))
+	@ar rcs $@ $(O_FILES) $(LIBFT_O) && printf "\033[0;32m" || printf "\033[0;31m"
 	@printf "%-24s\033[1;30m<<--\033[0;0m\n" "$@"
 
 $(O_DIR)%.o: $(C_DIR)%.c
@@ -46,7 +39,6 @@ $(O_DIR)%.o: $(C_DIR)%.c
 
 clean:
 	@rm $(O_FILES) 2> /dev/null || echo "" > /dev/null
-	@rm $(TMP_FILE) 2> /dev/null || echo "" > /dev/null
 	@rmdir $(O_DIR) 2> /dev/null || echo "" > /dev/null
 	@make -C $(LIBFT) clean
 
