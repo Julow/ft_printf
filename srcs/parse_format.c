@@ -13,7 +13,7 @@
 #include "ft.h"
 
 /*
-** sSdDoOuUxXicCnp
+** sSdDoOuUxXicCnpeEfF
 ** %%
 ** 0, ,-,+,#,^
 ** width
@@ -22,7 +22,7 @@
 ** =============
 ** =============
 ** $,'
-** eEfFgGaA
+** gGaA
 ** brk
 */
 t_format		g_formats[] = {
@@ -30,18 +30,22 @@ t_format		g_formats[] = {
 	{'s', &flag_s},
 	{'S', &flag_s},
 	{'d', &flag_d},
-	{'D', &flag_dd},
+	{'D', &flag_d},
+	{'i', &flag_d},
 	{'o', &flag_o},
 	{'O', &flag_o},
 	{'u', &flag_u},
 	{'U', &flag_u},
 	{'x', &flag_x},
 	{'X', &flag_x},
-	{'i', &flag_d},
 	{'c', &flag_c},
 	{'C', &flag_c},
 	{'n', &flag_n},
 	{'p', &flag_p},
+	{'e', &flag_e},
+	{'E', &flag_e},
+	{'f', &flag_f},
+	{'F', &flag_f},
 	{'\0', NULL}
 };
 
@@ -98,7 +102,7 @@ static int		parse_precision(t_opt *opt, char *format, va_list *ap)
 {
 	int				length;
 
-	opt->precision = -1;
+	opt->preci = -1;
 	if (*format != '.')
 		return (0);
 	format++;
@@ -106,10 +110,10 @@ static int		parse_precision(t_opt *opt, char *format, va_list *ap)
 	while (ft_isdigit(format[length]))
 		length++;
 	if (length > 0)
-		opt->precision = ft_atoin(format, length);
+		opt->preci = ft_atoin(format, length);
 	else if (format[0] == '*')
 	{
-		opt->precision = (int)(va_arg(*ap, int));
+		opt->preci = (int)(va_arg(*ap, int));
 		length++;
 	}
 	while (format[length] == ';')

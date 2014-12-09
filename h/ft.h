@@ -24,10 +24,10 @@
 
 typedef struct	s_opt
 {
-	t_format		*format;
+	struct s_format	*format;
 	char			*flags;
 	int				width;
-	int				precision;
+	int				preci;
 	char const		*length;
 }				t_opt;
 
@@ -52,6 +52,13 @@ int				parse_format(t_string *out, char *format, va_list *ap);
 ** parse_meta.c
 */
 int				parse_meta(t_string *out, char *format);
+
+/*
+** dutils.c
+*/
+void			stringaddid(t_string *str, long double nbr);
+void			stringaddd(t_string *str, long double d, int preci);
+void			stringaddde(t_string *str, long double d, int preci, char e);
 
 /*
 ** utils.c
@@ -79,5 +86,7 @@ void			flag_x(t_string *out, t_opt *opt, va_list *ap);
 void			flag_c(t_string *out, t_opt *opt, va_list *ap);
 void			flag_n(t_string *out, t_opt *opt, va_list *ap);
 void			flag_p(t_string *out, t_opt *opt, va_list *ap);
+void			flag_e(t_string *out, t_opt *opt, va_list *ap);
+void			flag_f(t_string *out, t_opt *opt, va_list *ap);
 
 #endif

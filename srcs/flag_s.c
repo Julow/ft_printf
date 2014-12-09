@@ -29,7 +29,7 @@ void			flag_s(t_string *out, t_opt *opt, va_list *ap)
 	while (str[++length] != '\0')
 		if (!ft_isprint(str[length]))
 			str[length] = '?';
-	if (opt->precision >= 0 && length > opt->precision)
-		length = opt->precision;
+	if (opt->preci >= 0 && length > opt->preci)
+		length = opt->preci;
 	add_string(out, str, length, opt);
 }

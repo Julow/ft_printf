@@ -12,30 +12,7 @@
 
 #include "ft.h"
 
-void			ft_stringaddil(t_string *str, t_long nbr)
-{
-	t_long			tmp;
-	int				i;
-
-	tmp = nbr;
-	i = ((tmp < 0) ? 2 : 1);
-	while ((tmp /= 10) != 0)
-		i++;
-	ft_stringext(str, i);
-	str->length += i;
-	i = str->length - 1;
-	str->content[i] = '0';
-	tmp = nbr;
-	while (nbr != 0)
-	{
-		str->content[i--] = '0' + ((nbr < 0) ? -(nbr % 10) : nbr % 10);
-		nbr /= 10;
-	}
-	if (tmp < 0)
-		str->content[i] = '-';
-}
-
-void			ft_stringaddid(t_string *str, double nbr)
+void			stringaddid(t_string *str, long double nbr)
 {
 	int				tmp;
 	int				length;
@@ -66,12 +43,12 @@ static void		fix_precision(t_string *str)
 	str->content[i]++;
 }
 
-void			ft_stringaddd(t_string *str, double d, int preci)
+void			stringaddd(t_string *str, long double d, int preci)
 {
 	int				i;
 	int				tmp;
 
-	ft_stringaddid(str, (preci <= 0) ? d + 0.5 : d);
+	stringaddid(str, (preci <= 0) ? d + 0.5 : d);
 	if (preci <= 0)
 		return ;
 	ft_stringext(str, preci + 1);
@@ -94,7 +71,7 @@ void			ft_stringaddd(t_string *str, double d, int preci)
 	}
 }
 
-void			ft_stringaddde(t_string *str, double d, int preci)
+void			stringaddde(t_string *str, long double d, int preci, char e)
 {
 	int				p;
 
@@ -114,8 +91,9 @@ void			ft_stringaddde(t_string *str, double d, int preci)
 		d *= 10;
 		p--;
 	}
-	ft_stringaddd(str, d, preci);
-	ft_stringadd(str, (p < 0) ? "e-" : "e+");
+	stringaddd(str, d, preci);
+	ft_stringaddc(str, e);
+	ft_stringaddc(str, (p < 0) ? '-' :'+');
 	if (p > -10 && p < 10)
 		ft_stringaddc(str, '0');
 	ft_stringaddi(str, (p < 0) ? -p : p);
