@@ -15,9 +15,9 @@
 t_long			get_arg(t_opt *opt, va_list *ap)
 {
 	if (ft_strequ(opt->length, "hh"))
-		return ((t_long)(va_arg(*ap, int)));
+		return ((t_long)(signed char)(va_arg(*ap, int)));
 	if (ft_strequ(opt->length, "h"))
-		return ((t_long)(va_arg(*ap, int)));
+		return ((t_long)(short)(va_arg(*ap, int)));
 	if (ft_strequ(opt->length, "ll"))
 		return ((t_long)(va_arg(*ap, long long)));
 	if (ft_strequ(opt->length, "l"))
@@ -36,9 +36,9 @@ t_long			get_arg(t_opt *opt, va_list *ap)
 t_ulong			get_unsigned_arg(t_opt *opt, va_list *ap)
 {
 	if (ft_strequ(opt->length, "hh"))
-		return ((t_ulong)(va_arg(*ap, int)));
+		return ((t_ulong)(unsigned char)(va_arg(*ap, int)));
 	if (ft_strequ(opt->length, "h"))
-		return ((t_ulong)(va_arg(*ap, int)));
+		return ((t_ulong)(unsigned short)(va_arg(*ap, int)));
 	if (ft_strequ(opt->length, "ll"))
 		return ((t_ulong)(va_arg(*ap, unsigned long long)));
 	if (ft_strequ(opt->length, "l"))
@@ -57,7 +57,7 @@ t_ulong			get_unsigned_arg(t_opt *opt, va_list *ap)
 long double		get_float_arg(t_opt *opt, va_list *ap)
 {
 	if (ft_strequ(opt->length, "L"))
-		return ((va_arg(*ap, long double)));
+		return (va_arg(*ap, long double));
 	if (ft_strequ(opt->length, "l"))
 		return ((long double)(va_arg(*ap, double)));
 	return ((long double)(va_arg(*ap, double)));

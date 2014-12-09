@@ -18,7 +18,7 @@ void			flag_c(t_string *out, t_opt *opt, va_list *ap)
 
 	if (opt->format->name == 'C')
 		c = (char)va_arg(*ap, wint_t);
-	else if (ft_strnequ(opt->length, "l", 1))
+	else if (ft_strequ(opt->length, "l"))
 		c = (char)va_arg(*ap, wint_t);
 	else
 		c = (char)va_arg(*ap, int);

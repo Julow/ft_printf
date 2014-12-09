@@ -19,17 +19,20 @@ void			flag_s(t_string *out, t_opt *opt, va_list *ap)
 
 	if (opt->format->name == 'S')
 		str = (char*)va_arg(*ap, wchar_t*);
-	else if (ft_strnequ(opt->length, "l", 1))
+	else if (ft_strequ(opt->length, "l"))
 		str = (char*)va_arg(*ap, wchar_t*);
 	else
 		str = va_arg(*ap, char*);
 	if (str == NULL)
-		str = "(null)";
+	{
+		add_string(out, "(null)", 6, opt);
+		return ;
+	}
 	length = -1;
 	while (str[++length] != '\0')
 		if (str[length] < 0)
 			str[length] = '?';
 	if (opt->preci >= 0 && length > opt->preci)
 		length = opt->preci;
-	add_string(out, str, length, opt);
+	add_string(out, (char*)str, length, opt);
 }

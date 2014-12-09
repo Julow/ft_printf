@@ -93,7 +93,7 @@ void			stringaddde(t_string *str, long double d, int preci, char e)
 	}
 	stringaddd(str, d, preci);
 	ft_stringaddc(str, e);
-	ft_stringaddc(str, (p < 0) ? '-' :'+');
+	ft_stringaddc(str, (p < 0) ? '-' : '+');
 	if (p > -10 && p < 10)
 		ft_stringaddc(str, '0');
 	ft_stringaddi(str, (p < 0) ? -p : p);

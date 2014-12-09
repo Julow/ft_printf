@@ -64,7 +64,8 @@ static t_bool	parsef(t_string *out, char *format, va_list *ap)
 				return (FALSE);
 			tmp = i;
 		}
-		ft_stringaddc(out, format[i]);
+		else
+			ft_stringaddc(out, format[i]);
 	}
 	return (TRUE);
 }

@@ -19,7 +19,7 @@ void			flag_o(t_string *out, t_opt *opt, va_list *ap)
 	t_string		*tmp;
 
 	if (opt->format->name == 'O')
-		o = (t_long)((unsigned int)(va_arg(*ap, long int)));
+		o = (t_long)(va_arg(*ap, unsigned long long int));
 	else
 		o = get_unsigned_arg(opt, ap);
 	octal = ft_itobase(o, "01234567");

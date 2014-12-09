@@ -24,11 +24,11 @@
 
 typedef struct	s_opt
 {
-	struct s_format	*format;
 	char			*flags;
 	int				width;
 	int				preci;
 	char const		*length;
+	struct s_format	*format;
 }				t_opt;
 
 typedef struct	s_format

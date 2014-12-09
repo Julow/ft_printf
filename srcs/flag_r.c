@@ -12,11 +12,12 @@
 
 #include "ft.h"
 
-static void		stringaddcr(t_string *out, char r)
+static void		stringaddcr(t_string *str, char r)
 {
 	if (!ft_isprint(r))
 	{
-		ft_stringaddc(str, '?');
+		ft_stringaddc(str, '\\');
+		ft_stringaddi(str, r);
 	}
 	else
 		ft_stringaddc(str, r);
@@ -30,12 +31,15 @@ void			flag_r(t_string *out, t_opt *opt, va_list *ap)
 
 	if (opt->format->name == 'R')
 		r = (char*)va_arg(*ap, wchar_t*);
-	else if (ft_strnequ(opt->length, "l", 1))
+	else if (ft_strequ(opt->length, "l"))
 		r = (char*)va_arg(*ap, wchar_t*);
 	else
 		r = va_arg(*ap, char*);
 	if (r == NULL)
-		r = "(null)";
+	{
+		add_string(out, "(null)", 6, opt);
+		return ;
+	}
 	str = ft_stringnew();
 	ft_stringext(str, ft_strlen(r));
 	length = -1;

@@ -13,10 +13,10 @@
 #include "ft.h"
 
 /*
-** sSdDoOuUxXicCnpeEfFbBrR
+** sSdDioOuUxXcCnpeEfFbBrR
 ** %%
 ** 0, ,-,+,#,^,'
-** width
+** width,*
 ** precision,*
 ** hh,h,ll,l,L,j,t,z,q
 ** =============

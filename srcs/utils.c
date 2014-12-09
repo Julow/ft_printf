@@ -48,14 +48,12 @@ void			add_long(t_string *out, t_long add, t_opt *opt)
 	while (i-- > 0)
 	{
 		str[i] = '0' + ((add < 0) ? -(add % 10) : add % 10);
-		if ((length - i) % 3 == 0 && ft_strchr(opt->flags, '\''))
+		if (((length - i) % 3) == 0 && ft_strchr(opt->flags, '\''))
 			str[--i] = ' ';
 		add /= 10;
 	}
-	if (tmp < 0)
-		str[0] = '-';
-	else if (ft_strchr(opt->flags, '+'))
-		str[0] = '+';
+	if (tmp < 0 || ft_strchr(opt->flags, '+'))
+		str[0] = (tmp < 0) ? '-' : '+';
 	else if (ft_strchr(opt->flags, ' '))
 		str[0] = ' ';
 	add_string(out, str, length, opt);
