@@ -39,6 +39,15 @@ typedef ULONG	t_ulong;
 #  define ERROR		-1
 # endif
 
+# define MAL_STRERR	("Memory error: Not enough memory\n")
+# define MAL_EXIT	1
+
+typedef struct	s_lst
+{
+	void			*data;
+	struct s_lst	*next;
+}				t_lst;
+
 typedef struct	s_array
 {
 	void			**data;
@@ -128,11 +137,17 @@ char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 ** Conversion
 */
 int				ft_atoi(const char *str);
-char			*ft_itoa(int n);
+t_long			ft_atol(const char *str);
 double			ft_atod(const char *str);
 
-int				ft_toupper(int c);
-int				ft_tolower(int c);
+char			*ft_itoa(int n);
+char			*ft_ltoa(t_long n);
+
+char			*ft_itobase(t_long nb, char *base);
+t_long			ft_basetoi(char *str, char *base);
+
+char			ft_toupper(char c);
+char			ft_tolower(char c);
 void			ft_strlower(char *str);
 void			ft_strupper(char *str);
 
@@ -140,17 +155,29 @@ void			ft_strupper(char *str);
 ** Write
 */
 void			ft_putchar(char c);
-void			ft_putchar_fd(char c, int fd);
 void			ft_putnchar(char c, int n);
-void			ft_putnchar_fd(char c, int n, int fd);
-void			ft_putnbr(int n);
-void			ft_putnbr_fd(int n, int fd);
 void			ft_putstr(char const *s);
-void			ft_putstr_fd(char const *s, int fd);
 void			ft_putlstr(char const *s, int len);
-void			ft_putlstr_fd(char const *s, int len, int fd);
 void			ft_putendl(char *s);
+void			ft_putnbr(int n);
+void			ft_putchar_fd(char c, int fd);
+void			ft_putnchar_fd(char c, int n, int fd);
+void			ft_putstr_fd(char const *s, int fd);
+void			ft_putlstr_fd(char const *s, int len, int fd);
 void			ft_putendl_fd(char *s, int fd);
+void			ft_putnbr_fd(int n, int fd);
+
+/*
+** Store pointers using the struct s_lst (t_lst)
+*/
+t_lst			*ft_lstnew(void *data);
+void			ft_lstadd(t_lst **alst, t_lst *add);
+void			ft_lstafter(t_lst *lst, t_lst *add);
+void			ft_lstdel(t_lst **alst, void (*f)(void*));
+void			ft_lstdelnext(t_lst *lst, void (*f)(void*));
+void			ft_lstdelone(t_lst **alst, void (*f)(void*));
+void			ft_lstiter(t_lst *lst, void (*f)(void *data));
+t_lst			*ft_lstmap(t_lst *lst, t_lst *(*f)(t_lst*));
 
 /*
 ** Store pointers using the struct s_array (t_array)
@@ -172,7 +199,7 @@ void			ft_arrayext(t_array *array, int need);
 
 /*
 ** Store pointers paired with a t_string 'key'
-** Use the struct s_array (t_array)
+** Use with the struct s_array (t_array)
 */
 t_pair			*ft_pairnew(char *key, void *value);
 t_pair			*ft_pairget(t_array *array, char *key);
