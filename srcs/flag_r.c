@@ -1,35 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_s.c                                           :+:      :+:    :+:   */
+/*   flag_r.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/27 13:11:08 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/27 13:11:09 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/09 17:53:49 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/09 17:53:50 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-void			flag_s(t_string *out, t_opt *opt, va_list *ap)
+static void		stringaddcr(t_string *out, char r)
 {
-	char			*str;
+	if (!ft_isprint(r))
+	{
+		ft_stringaddc(str, '?');
+	}
+	else
+		ft_stringaddc(str, r);
+}
+
+void			flag_r(t_string *out, t_opt *opt, va_list *ap)
+{
+	char			*r;
+	t_string		*str;
 	int				length;
 
-	if (opt->format->name == 'S')
-		str = (char*)va_arg(*ap, wchar_t*);
+	if (opt->format->name == 'R')
+		r = (char*)va_arg(*ap, wchar_t*);
 	else if (ft_strnequ(opt->length, "l", 1))
-		str = (char*)va_arg(*ap, wchar_t*);
+		r = (char*)va_arg(*ap, wchar_t*);
 	else
-		str = va_arg(*ap, char*);
-	if (str == NULL)
-		str = "(null)";
+		r = va_arg(*ap, char*);
+	if (r == NULL)
+		r = "(null)";
+	str = ft_stringnew();
+	ft_stringext(str, ft_strlen(r));
 	length = -1;
-	while (str[++length] != '\0')
-		if (str[length] < 0)
-			str[length] = '?';
+	while (r[++length] != '\0')
+		stringaddcr(str, r[length]);
 	if (opt->preci >= 0 && length > opt->preci)
 		length = opt->preci;
-	add_string(out, str, length, opt);
+	add_string(out, str->content, length, opt);
+	ft_stringkil(str);
 }

@@ -13,17 +13,17 @@
 #include "ft.h"
 
 /*
-** sSdDoOuUxXicCnpeEfF
+** sSdDoOuUxXicCnpeEfFbBrR
 ** %%
-** 0, ,-,+,#,^
+** 0, ,-,+,#,^,'
 ** width
 ** precision,*
 ** hh,h,ll,l,L,j,t,z,q
 ** =============
 ** =============
-** $,'
+** $
 ** gGaA
-** brk
+** k
 */
 t_format		g_formats[] = {
 	{'%', &flag_percent},
@@ -46,6 +46,10 @@ t_format		g_formats[] = {
 	{'E', &flag_e},
 	{'f', &flag_f},
 	{'F', &flag_f},
+	{'b', &flag_b},
+	{'B', &flag_b},
+	{'r', &flag_r},
+	{'R', &flag_r},
 	{'\0', NULL}
 };
 

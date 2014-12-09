@@ -36,7 +36,7 @@ void			add_long(t_string *out, t_long add, t_opt *opt)
 	int				i;
 	int				length;
 	t_long			tmp;
-	char			str[21];
+	char			str[30];
 
 	tmp = add;
 	length = (tmp < 0 || ft_strchr(opt->flags, ' ')
@@ -48,6 +48,8 @@ void			add_long(t_string *out, t_long add, t_opt *opt)
 	while (i-- > 0)
 	{
 		str[i] = '0' + ((add < 0) ? -(add % 10) : add % 10);
+		if ((length - i) % 3 == 0 && ft_strchr(opt->flags, '\''))
+			str[--i] = ' ';
 		add /= 10;
 	}
 	if (tmp < 0)

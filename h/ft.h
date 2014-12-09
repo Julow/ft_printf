@@ -88,5 +88,7 @@ void			flag_n(t_string *out, t_opt *opt, va_list *ap);
 void			flag_p(t_string *out, t_opt *opt, va_list *ap);
 void			flag_e(t_string *out, t_opt *opt, va_list *ap);
 void			flag_f(t_string *out, t_opt *opt, va_list *ap);
+void			flag_b(t_string *out, t_opt *opt, va_list *ap);
+void			flag_r(t_string *out, t_opt *opt, va_list *ap);
 
 #endif
