@@ -24,7 +24,7 @@
 
 typedef struct	s_opt
 {
-	char			format;
+	t_format		*format;
 	char			*flags;
 	int				width;
 	int				precision;
@@ -68,27 +68,15 @@ t_ulong			get_unsigned_arg(t_opt *opt, va_list *ap);
 long double		get_float_arg(t_opt *opt, va_list *ap);
 
 /*
-** baseutils.c
-*/
-char			*ft_itobase(t_long nb, char *base);
-t_long			ft_basetoi(char *str, char *base);
-
-/*
 ** flags
 */
 void			flag_percent(t_string *out, t_opt *opt, va_list *ap);
 void			flag_s(t_string *out, t_opt *opt, va_list *ap);
-void			flag_ss(t_string *out, t_opt *opt, va_list *ap);
 void			flag_d(t_string *out, t_opt *opt, va_list *ap);
-void			flag_dd(t_string *out, t_opt *opt, va_list *ap);
 void			flag_o(t_string *out, t_opt *opt, va_list *ap);
-void			flag_oo(t_string *out, t_opt *opt, va_list *ap);
 void			flag_u(t_string *out, t_opt *opt, va_list *ap);
-void			flag_uu(t_string *out, t_opt *opt, va_list *ap);
 void			flag_x(t_string *out, t_opt *opt, va_list *ap);
-void			flag_xx(t_string *out, t_opt *opt, va_list *ap);
 void			flag_c(t_string *out, t_opt *opt, va_list *ap);
-void			flag_cc(t_string *out, t_opt *opt, va_list *ap);
 void			flag_n(t_string *out, t_opt *opt, va_list *ap);
 void			flag_p(t_string *out, t_opt *opt, va_list *ap);
 

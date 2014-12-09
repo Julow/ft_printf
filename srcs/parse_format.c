@@ -28,18 +28,18 @@
 t_format		g_formats[] = {
 	{'%', &flag_percent},
 	{'s', &flag_s},
-	{'S', &flag_ss},
+	{'S', &flag_s},
 	{'d', &flag_d},
 	{'D', &flag_dd},
 	{'o', &flag_o},
-	{'O', &flag_oo},
+	{'O', &flag_o},
 	{'u', &flag_u},
-	{'U', &flag_uu},
+	{'U', &flag_u},
 	{'x', &flag_x},
-	{'X', &flag_xx},
+	{'X', &flag_x},
 	{'i', &flag_d},
 	{'c', &flag_c},
-	{'C', &flag_cc},
+	{'C', &flag_c},
 	{'n', &flag_n},
 	{'p', &flag_p},
 	{'\0', NULL}
@@ -74,14 +74,21 @@ static int		parse_flags(t_opt *opt, char *format)
 	return (i);
 }
 
-static int		parse_width(t_opt *opt, char *format)
+static int		parse_width(t_opt *opt, char *format, va_list *ap)
 {
 	int				length;
 
+	opt->width = 0;
 	length = 0;
 	while (ft_isdigit(format[length]))
 		length++;
-	opt->width = ft_atoin(format, length);
+	if (length > 0)
+		opt->width = ft_atoin(format, length);
+	else if (format[0] == '*')
+	{
+		opt->width = (int)(va_arg(*ap, int));
+		length++;
+	}
 	while (format[length] == ';')
 		length++;
 	return (length);
@@ -91,7 +98,7 @@ static int		parse_precision(t_opt *opt, char *format, va_list *ap)
 {
 	int				length;
 
-	opt->precision = 6;
+	opt->precision = -1;
 	if (*format != '.')
 		return (0);
 	format++;
@@ -100,7 +107,7 @@ static int		parse_precision(t_opt *opt, char *format, va_list *ap)
 		length++;
 	if (length > 0)
 		opt->precision = ft_atoin(format, length);
-	else if (format[1] == '*')
+	else if (format[0] == '*')
 	{
 		opt->precision = (int)(va_arg(*ap, int));
 		length++;
@@ -139,7 +146,7 @@ int				parse_format(t_string *out, char *format, va_list *ap)
 
 	length = 0;
 	length += parse_flags(&opt, format + length);
-	length += parse_width(&opt, format + length);
+	length += parse_width(&opt, format + length, ap);
 	length += parse_precision(&opt, format + length, ap);
 	length += parse_length(&opt, format + length);
 	i = -1;
@@ -147,7 +154,7 @@ int				parse_format(t_string *out, char *format, va_list *ap)
 	{
 		if (g_formats[i].name == format[length])
 		{
-			opt.format = g_formats[i].name;
+			opt.format = g_formats + i;
 			g_formats[i].func(out, &opt, ap);
 			free(opt.flags);
 			return (length + 1);

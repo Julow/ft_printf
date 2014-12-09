@@ -14,5 +14,11 @@
 
 void			flag_u(t_string *out, t_opt *opt, va_list *ap)
 {
-	add_long(out, get_unsigned_arg(opt, ap), opt);
+	t_long			d;
+
+	if (opt->format->name == 'U')
+		d = (t_long)(va_arg(*ap, unsigned long));
+	else
+		d = get_unsigned_arg(opt, ap);
+	add_long(out, d, opt);
 }

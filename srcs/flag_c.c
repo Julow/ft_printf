@@ -16,7 +16,9 @@ void			flag_c(t_string *out, t_opt *opt, va_list *ap)
 {
 	char			c;
 
-	if (ft_strnequ(opt->length, "l", 1))
+	if (opt->format->name == 'C')
+		c = (char)va_arg(*ap, wint_t);
+	else if (ft_strnequ(opt->length, "l", 1))
 		c = (char)va_arg(*ap, wint_t);
 	else
 		c = (char)va_arg(*ap, int);
