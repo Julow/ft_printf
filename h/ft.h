@@ -35,6 +35,7 @@ typedef struct	s_format
 {
 	char			name;
 	void			(*func)(t_string*, t_opt *opt, va_list*);
+	char			*disabled;
 }				t_format;
 
 typedef struct	s_meta
@@ -57,8 +58,8 @@ int				parse_meta(t_string *out, char *format);
 ** dutils.c
 */
 void			stringaddid(t_string *str, long double nbr);
-void			stringaddd(t_string *str, long double d, int preci);
-void			stringaddde(t_string *str, long double d, int preci, char e);
+void			stringaddd(t_string *str, long double d, int preci, t_opt *opt);
+void			stringaddde(t_string *str, long double d, int pre, t_opt *opt);
 
 /*
 ** utils.c

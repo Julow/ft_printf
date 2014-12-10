@@ -16,8 +16,9 @@ void			add_string(t_string *out, char *add, int len, t_opt *opt)
 {
 	char			*left;
 	char			*center;
-	char const		fill = (ft_strchr(opt->flags, '0') == NULL) ? ' ' : '0';
+	char const		fill = (ft_strchr(opt->format->disabled, '0') ||
 
+	ft_strchr(opt->flags, '0') == NULL) ? ' ' : '0';
 	left = ft_strrchr(opt->flags, '-');
 	center = ft_strrchr(opt->flags, '^');
 	center = (center > left) ? center : NULL;

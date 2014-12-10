@@ -17,9 +17,7 @@ void			flag_s(t_string *out, t_opt *opt, va_list *ap)
 	char			*str;
 	int				length;
 
-	if (opt->format->name == 'S')
-		str = (char*)va_arg(*ap, wchar_t*);
-	else if (ft_strequ(opt->length, "l"))
+	if (opt->format->name == 'S' || ft_strequ(opt->length, "l"))
 		str = (char*)va_arg(*ap, wchar_t*);
 	else
 		str = va_arg(*ap, char*);

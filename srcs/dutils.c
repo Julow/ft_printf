@@ -43,11 +43,15 @@ static void		fix_precision(t_string *str)
 	str->content[i]++;
 }
 
-void			stringaddd(t_string *str, long double d, int preci)
+void			stringaddd(t_string *str, long double d, int preci, t_opt *opt)
 {
 	int				i;
 	int				tmp;
 
+	if (d < 0 || ft_strchr(opt->flags, '+'))
+		ft_stringaddc(str, (d < 0) ? '-' : '+');
+	else if (ft_strchr(opt->flags, ' '))
+		ft_stringaddc(str, ' ');
 	stringaddid(str, (preci <= 0) ? d + 0.5 : d);
 	if (preci <= 0)
 		return ;
@@ -61,17 +65,14 @@ void			stringaddd(t_string *str, long double d, int preci)
 		if ((i + 1) >= preci)
 			d += 0.5;
 		tmp = (int)d;
-		if (tmp >= 10)
-		{
-			tmp = tmp % 10;
+		if (tmp >= 10 && (tmp %= 10) >= 0)
 			fix_precision(str);
-		}
 		str->content[str->length++] = '0' + tmp;
 		d -= tmp;
 	}
 }
 
-void			stringaddde(t_string *str, long double d, int preci, char e)
+void			stringaddde(t_string *str, long double d, int pre, t_opt *opt)
 {
 	int				p;
 
@@ -91,8 +92,8 @@ void			stringaddde(t_string *str, long double d, int preci, char e)
 		d *= 10;
 		p--;
 	}
-	stringaddd(str, d, preci);
-	ft_stringaddc(str, e);
+	stringaddd(str, d, pre, opt);
+	ft_stringaddc(str, opt->format->name);
 	ft_stringaddc(str, (p < 0) ? '-' : '+');
 	if (p > -10 && p < 10)
 		ft_stringaddc(str, '0');
