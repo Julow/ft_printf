@@ -48,5 +48,5 @@ void			flag_r(t_string *out, t_opt *opt, va_list *ap)
 	if (opt->preci >= 0 && length > opt->preci)
 		length = opt->preci;
 	add_string(out, str.content, length, opt);
-	free(str->content);
+	free(str.content);
 }

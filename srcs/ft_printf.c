@@ -77,7 +77,7 @@ int				ft_printf_fd(const int fd, const char *format, ...)
 	ft_stringini(&output);
 	va_start(ap, format);
 	parsef(&output, (char*)format, &ap);
-	ft_stringput_fd(&output, fd);
+	ft_stringputfd(&output, fd);
 	va_end(ap);
 	free(output.content);
 	return (output.length);
