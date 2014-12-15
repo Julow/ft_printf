@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft.h"
+#include <wchar.h>
 
 void			flag_s(t_string *out, t_opt *opt, va_list *ap)
 {

@@ -16,13 +16,14 @@ void			flag_p(t_string *out, t_opt *opt, va_list *ap)
 {
 	t_ulong			p;
 	char			*hex;
-	t_string		*tmp;
+	t_string		tmp;
 
 	p = (t_ulong)(va_arg(*ap, void*));
-	tmp = ft_stringnews("0x");
+	ft_stringini(&tmp);
+	ft_stringadd(&tmp, "0x")
 	hex = ft_itobase(p, "0123456789abcdef");
-	ft_stringadd(tmp, hex);
+	ft_stringadd(&tmp, hex);
 	free(hex);
-	add_string(out, tmp->content, tmp->length, opt);
-	ft_stringkil(tmp);
+	add_string(out, tmp.content, tmp.length, opt);
+	free(tmp.content);
 }

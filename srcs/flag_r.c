@@ -26,7 +26,7 @@ static void		stringaddcr(t_string *str, char r)
 void			flag_r(t_string *out, t_opt *opt, va_list *ap)
 {
 	char			*r;
-	t_string		*str;
+	t_string		str;
 	int				length;
 
 	if (opt->format->name == 'R')
@@ -40,13 +40,13 @@ void			flag_r(t_string *out, t_opt *opt, va_list *ap)
 		add_string(out, "(null)", 6, opt);
 		return ;
 	}
-	str = ft_stringnew();
-	ft_stringext(str, ft_strlen(r));
+	ft_stringini(&str);
+	ft_stringext(&str, ft_strlen(r));
 	length = -1;
 	while (r[++length] != '\0')
-		stringaddcr(str, r[length]);
+		stringaddcr(&str, r[length]);
 	if (opt->preci >= 0 && length > opt->preci)
 		length = opt->preci;
-	add_string(out, str->content, length, opt);
-	ft_stringkil(str);
+	add_string(out, str.content, length, opt);
+	free(str->content);
 }

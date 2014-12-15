@@ -15,12 +15,8 @@
 
 # include "libft.h"
 
-# include <stddef.h>
 # include <stdarg.h>
 # include <stdlib.h>
-# include <wchar.h>
-# include <sys/types.h>
-# include <inttypes.h>
 
 typedef struct	s_opt
 {

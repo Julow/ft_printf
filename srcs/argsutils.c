@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "ft.h"
+#include <sys/types.h>
+#include <inttypes.h>
 
 t_long			get_arg(t_opt *opt, va_list *ap)
 {
