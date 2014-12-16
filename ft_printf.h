@@ -13,8 +13,6 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft.h"
-
 /*
 ** =============
 ** A format sequence be like:
@@ -25,6 +23,8 @@
 ** format can be one of "%sSdDoOuUxXicCnp"
 ** =============
 ** =
+** t_string		*ft_stringf(const char *format, ...);
+** void			ft_stringaddf(t_string *str, const char *format, ...);
 ** =
 ** ft_stringf
 ** =============
@@ -51,8 +51,6 @@
 ** =============
 ** Return the total of char printed.
 */
-t_string		*ft_stringf(const char *format, ...);
-void			ft_stringaddf(t_string *str, const char *format, ...);
 int				ft_printf(const char *format, ...);
 int				ft_printf_fd(const int fd, const char *format, ...);
 
