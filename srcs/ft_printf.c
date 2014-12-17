@@ -46,15 +46,6 @@ t_string		*ft_stringf(const char *format, ...)
 	return (str);
 }
 
-void			ft_stringaddf(t_string *str, const char *format, ...)
-{
-	va_list			ap;
-
-	va_start(ap, format);
-	parsef(str, (char*)format, &ap);
-	va_end(ap);
-}
-
 int				ft_printf(const char *format, ...)
 {
 	t_string		output;

@@ -24,12 +24,12 @@ void			add_string(t_string *out, char *add, int len, t_opt *opt)
 	center = (center > left) ? center : NULL;
 	left = (left > center) ? left : NULL;
 	if (left == NULL || center != NULL)
-		ft_stringaddcn(out, fill, (center != NULL) ? (opt->width - len) / 2 :
-			opt->width - len);
+		ft_stringaddcn(out, fill, ((center != NULL) ? (opt->width - len) / 2 :
+			opt->width - len));
 	ft_stringaddl(out, add, len);
 	if (left != NULL || center != NULL)
-		ft_stringaddcn(out, fill, (center != NULL) ? (opt->width - len) / 2 :
-			opt->width - len);
+		ft_stringaddcn(out, fill, ((center != NULL) ? (opt->width - len) / 2 :
+			opt->width - len));
 }
 
 void			add_long(t_string *out, t_long add, t_opt *opt)

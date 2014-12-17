@@ -27,7 +27,7 @@ O_FILES = $(addprefix $(O_DIR),$(C_FILES:.c=.o))
 
 all:
 	@(if [ "$(DEBUG)" -eq "1" ]; then make -C $(LIBFT) debug; else make -C $(LIBFT); fi || (echo "\033[0;31m$(LIBFT)\033[0;0m" && exit 1)) | grep -v "Nothing to be done" || echo "" > /dev/null
-	@make -j5 $(NAME)
+	@if [ "$(DEBUG)" -eq "1" ]; then make -j4 _debug $(NAME); else make -j4 $(NAME); fi
 
 $(NAME): $(O_FILES)
 	$(eval LIBFT_O = $(addprefix $(LIBFT)o/,$(shell ls -1 $(LIBFT)o | grep "\.o")))

@@ -27,11 +27,8 @@ void			flag_s(t_string *out, t_opt *opt, va_list *ap)
 		add_string(out, "(null)", 6, opt);
 		return ;
 	}
-	length = -1;
-	while (str[++length] != '\0')
-		if (str[length] < 0)
-			str[length] = '?';
+	length = ft_strlen(str);
 	if (opt->preci >= 0 && length > opt->preci)
 		length = opt->preci;
-	add_string(out, (char*)str, length, opt);
+	add_string(out, ft_strdup(str), length, opt);
 }

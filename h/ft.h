@@ -18,21 +18,21 @@
 # include <stdarg.h>
 # include <stdlib.h>
 
+typedef struct	s_format
+{
+	char			name;
+	void			(*func)();
+	char			*disabled;
+}				t_format;
+
 typedef struct	s_opt
 {
 	char			*flags;
 	int				width;
 	int				preci;
 	char const		*length;
-	struct s_format	*format;
+	t_format		*format;
 }				t_opt;
-
-typedef struct	s_format
-{
-	char			name;
-	void			(*func)(t_string*, t_opt *opt, va_list*);
-	char			*disabled;
-}				t_format;
 
 typedef struct	s_meta
 {

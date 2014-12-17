@@ -23,31 +23,17 @@
 ** format can be one of "%sSdDoOuUxXicCnp"
 ** =============
 ** =
-** t_string		*ft_stringf(const char *format, ...);
-** void			ft_stringaddf(t_string *str, const char *format, ...);
-** =
-** ft_stringf
-** =============
-** Process the format sequence like printf
-** =============
-** Return a new t_string containing the result.
-** =
-** =
-** ft_stringaddf
-** =============
-** Like ft_stringf but the result is added to the t_string 'str'
-** =
 ** =
 ** ft_printf
 ** =============
-** Like ft_stringf but the result is printed to stdout
+** Process the format sequence like printf and print the result to stdout
 ** =============
 ** Return the total of char printed.
 ** =
 ** =
 ** ft_printf_fd
 ** =============
-** Like ft_stringf but the result is printed to the fd 'fd'
+** Like ft_printf but the result is printed to the fd 'fd'
 ** =============
 ** Return the total of char printed.
 */
