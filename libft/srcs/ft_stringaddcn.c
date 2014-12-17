@@ -17,6 +17,8 @@ void			ft_stringaddcn(t_string *str, char c, int n)
 	char			chars[n];
 	int				i;
 
+	if (n < 0)
+		return ;
 	ft_stringext(str, n);
 	i = -1;
 	while (++i < n)
