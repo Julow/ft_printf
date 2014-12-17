@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_hidenp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/15 00:01:56 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/15 00:01:56 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/16 22:55:17 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/16 22:55:17 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
 
-# include "libft.h"
-
-# define MAL_STRERR	("Memory error: Not enough memory\n")
-# define MAL_EXIT	1
-
-# define GNL_BUFF	256
-
-# define GNL_SUCCES	1
-# define GNL_END	0
-# define GNL_ERROR	-1
-
-typedef struct	s_gnl
+t_bool			ft_hidenp(char *hide, char *str)
 {
-	int				fd;
-	t_string		buff;
-	struct s_gnl	*next;
-}				t_gnl;
-
-#endif
+	while (*(str++) != '\0')
+		if (*hide == *str)
+			hide++;
+	return ((*hide == '\0') ? TRUE : FALSE);
+}
