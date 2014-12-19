@@ -18,6 +18,10 @@
 # include <stdarg.h>
 # include <stdlib.h>
 
+# define HASF(c)	(ft_strchr(opt->flags, (c)) != NULL)
+
+# define LONG_BUFF	(40)
+
 typedef struct	s_format
 {
 	char			name;
@@ -62,6 +66,7 @@ void			stringaddde(t_string *str, long double d, int pre, t_opt *opt);
 */
 void			add_string(t_string *out, char *add, int len, t_opt *opt);
 void			add_long(t_string *out, t_long add, t_opt *opt);
+void			clear_dis(t_opt *opt);
 int				ft_atoin(char *str, int len);
 
 /*

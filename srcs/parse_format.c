@@ -34,8 +34,8 @@ t_format		g_formats[] = {
 	{'i', &flag_d, ""},
 	{'o', &flag_o, ""},
 	{'O', &flag_o, ""},
-	{'u', &flag_u, ""},
-	{'U', &flag_u, ""},
+	{'u', &flag_u, "+ "},
+	{'U', &flag_u, "+ "},
 	{'x', &flag_x, ""},
 	{'X', &flag_x, ""},
 	{'c', &flag_c, ""},
@@ -109,8 +109,9 @@ static int		parse_precision(t_opt *opt, char *format, va_list *ap)
 	opt->preci = -1;
 	if (*format != '.')
 		return (0);
-	format++;
 	length = 0;
+	while (*(++format) == '.')
+		length++;
 	while (ft_isdigit(format[length]))
 		length++;
 	if (length > 0)
@@ -163,11 +164,12 @@ int				parse_format(t_string *out, char *format, va_list *ap)
 		if (g_formats[i].name == format[length])
 		{
 			opt.format = g_formats + i;
+			clear_dis(&opt);
 			g_formats[i].func(out, &opt, ap);
 			free(opt.flags);
 			return (length + 1);
 		}
 	}
 	free(opt.flags);
-	return (0);
+	return (length);
 }

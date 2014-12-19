@@ -16,9 +16,8 @@ void			add_string(t_string *out, char *add, int len, t_opt *opt)
 {
 	char			*left;
 	char			*center;
-	char const		fill = (ft_strchr(opt->format->disabled, '0') ||
+	char const		fill = (!HASF('0')) ? ' ' : '0';
 
-	ft_strchr(opt->flags, '0') == NULL) ? ' ' : '0';
 	left = ft_strrchr(opt->flags, '-');
 	center = ft_strrchr(opt->flags, '^');
 	center = (center > left) ? center : NULL;
@@ -35,29 +34,39 @@ void			add_string(t_string *out, char *add, int len, t_opt *opt)
 void			add_long(t_string *out, t_long add, t_opt *opt)
 {
 	int				i;
-	int				length;
 	t_long			tmp;
-	char			str[30];
+	char			str[LONG_BUFF];
 
+	ft_bzero(str, LONG_BUFF);
+	i = LONG_BUFF;
 	tmp = add;
-	length = (tmp < 0 || ft_strchr(opt->flags, ' ')
-		|| ft_strchr(opt->flags, '+')) ? 2 : 1;
-	while ((tmp /= 10) != 0)
-		length++;
-	i = length;
-	tmp = add;
-	while (i-- > 0)
+	if (add == 0)
+	{
+		str[--i] = '0';
+		i--;
+	}
+	while (i-- > 0 && add != 0)
 	{
 		str[i] = '0' + ((add < 0) ? -(add % 10) : add % 10);
-		if (((length - i) % 3) == 0 && ft_strchr(opt->flags, '\''))
+		if (((LONG_BUFF - i + 1) % 4) == 0 && HASF('\''))
 			str[--i] = ' ';
 		add /= 10;
 	}
-	if (tmp < 0 || ft_strchr(opt->flags, '+'))
-		str[0] = (tmp < 0) ? '-' : '+';
-	else if (ft_strchr(opt->flags, ' '))
-		str[0] = ' ';
-	add_string(out, str, length, opt);
+	if (tmp < 0 || HASF('+'))
+		str[i--] = (tmp < 0) ? '-' : '+';
+	else if (HASF(' '))
+		str[i--] = ' ';
+	add_string(out, str + i, LONG_BUFF - i, opt);
+}
+
+void			clear_dis(t_opt *opt)
+{
+	int				i;
+
+	i = -1;
+	while (opt->flags[++i] != '\0')
+		if (ft_strchr(opt->format->disabled, opt->flags[i]))
+			opt->flags[i] = ';';
 }
 
 int				ft_atoin(char *str, int len)
