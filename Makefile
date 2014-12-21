@@ -40,7 +40,7 @@ $(O_DIR)%.o: $(C_DIR)%.c
 
 clean:
 	@rm $(O_FILES) 2> /dev/null || echo "" > /dev/null
-	@rmdir $(O_DIR) 2> /dev/null || echo "" > /dev/null
+	@rmdir -p $(O_DIR) 2> /dev/null || echo "" > /dev/null
 	@make -C $(LIBFT) clean
 
 fclean: clean
@@ -51,13 +51,17 @@ debug: _debug all
 
 rebug: fclean debug
 
+test: re
+	mkdir -p $(O_DIR)
+	gcc printf_test.c -Wall -Wextra -L . -I . -l ftprintf -o $(O_DIR)test_ftprintf
+	./$(O_DIR)test_ftprintf > $(O_DIR)a.diff
+	./$(O_DIR)test_ftprintf 2 > $(O_DIR)b.diff
+	diff -ayt -W 160 -- $(O_DIR)a.diff $(O_DIR)b.diff
+
 _debug:
 	$(eval FLAGS = -Wall -Wextra -g)
 	$(eval DEBUG = 1)
 
-update: fclean
-	@git subtree pull --prefix=libft --squash ../libft master -m "Update libft"
-
 re: fclean all
 
-.PHONY: all clean fclean debug rebug _debug update re
+.PHONY: all clean fclean debug rebug _debug test re
