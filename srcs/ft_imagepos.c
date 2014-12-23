@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stringaddcn.c                                   :+:      :+:    :+:   */
+/*   ft_imagepos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/22 18:59:32 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/22 18:59:34 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/17 19:14:11 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/17 19:14:11 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			ft_stringaddcn(t_string *str, char c, int n)
+t_color			ft_imagepos(t_image *img, int pos)
 {
-	char			chars[n];
+	t_color			c;
 	int				i;
 
-	if (n < 0)
-		return ;
+	c = C(0xFF000000);
 	i = -1;
-	while (++i < n)
-		chars[i] = c;
-	ft_stringaddl(str, chars, n);
+	while (++i < img->opp)
+	{
+		c.u = c.u >> 8;
+		c.b.a = img->data[pos + i];
+	}
+	c.u = c.u << (4 - img->opp);
+	return (c);
 }

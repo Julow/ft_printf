@@ -15,7 +15,6 @@
 void			ft_drawnpt(t_image *img, t_pt pt, int n, t_color color)
 {
 	int				pos;
-	int				i;
 	t_color			tmp;
 
 	if (pt.x < 0 || pt.x >= img->width || pt.y < 0 || pt.y >= img->height)
@@ -25,12 +24,10 @@ void			ft_drawnpt(t_image *img, t_pt pt, int n, t_color color)
 	while (n >= 0)
 	{
 		tmp = color;
-		i = -1;
-		while (++i < img->opp)
-		{
-			img->data[pos + n + i] = tmp.b.b;
-			tmp.i = tmp.i >> 8;
-		}
+		if (ALPHA(tmp))
+			ft_resalpha(&tmp, ft_imagepos(img, pos));
+		ft_imageput(img, pos, tmp);
 		n -= img->opp;
+		pos += img->opp;
 	}
 }

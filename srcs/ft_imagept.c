@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stringaddcn.c                                   :+:      :+:    :+:   */
+/*   ft_imagept.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/22 18:59:32 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/22 18:59:34 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/17 18:11:43 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/17 18:11:44 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			ft_stringaddcn(t_string *str, char c, int n)
+t_color			ft_imagept(t_image *img, t_pt pt)
 {
-	char			chars[n];
+	t_color			c;
+	int				pos;
 	int				i;
 
-	if (n < 0)
-		return ;
+	c = C(0xFF000000);
+	if (pt.x < 0 || pt.x >= img->width || pt.y < 0 || pt.y >= img->height)
+		return (c);
+	pos = img->l_size * pt.y + (pt.x * img->opp);
 	i = -1;
-	while (++i < n)
-		chars[i] = c;
-	ft_stringaddl(str, chars, n);
+	while (++i < img->opp)
+	{
+		c.u = c.u >> 8;
+		c.b.a = img->data[pos + i];
+	}
+	c.u = c.u << (4 - img->opp);
+	return (c);
 }
