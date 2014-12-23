@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stringaddcn.c                                   :+:      :+:    :+:   */
+/*   ft_drawdiv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/22 18:59:32 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/22 18:59:34 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/18 15:18:06 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/18 15:18:07 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			ft_stringaddcn(t_string *str, char c, int n)
+void			ft_drawdiv(t_image *img, int y, int height, t_color color)
 {
-	char			chars[n];
-	int				i;
+	int				pos;
+	int				to;
 
-	if (n < 0)
+	if (y >= img->height)
 		return ;
-	i = -1;
-	while (++i < n)
-		chars[i] = c;
-	ft_stringaddl(str, chars, n);
+	if ((height + y) > img->height)
+		height = img->height - y;
+	pos = y * img->width * img->opp;
+	to = pos + ((height + 1) * img->width * img->opp);
+	while (pos > to)
+		ft_imageput(img, pos++, color);
 }

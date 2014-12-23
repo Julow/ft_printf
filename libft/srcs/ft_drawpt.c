@@ -14,16 +14,9 @@
 
 void			ft_drawpt(t_image *img, t_pt pt, t_color color)
 {
-	int				pos;
-	int				i;
-
 	if (pt.x < 0 || pt.x >= img->width || pt.y < 0 || pt.y >= img->height)
 		return ;
-	pos = (img->width * pt.y + pt.x) * img->opp;
-	i = -1;
-	while (++i < img->opp)
-	{
-		img->data[pos + i] = color.b.b;
-		color.i = color.i >> 8;
-	}
+	if (ALPHA(color))
+		ft_resalpha(&color, ft_imagept(img, pt));
+	ft_imageput(img, (img->width * pt.y + pt.x) * img->opp, color);
 }
