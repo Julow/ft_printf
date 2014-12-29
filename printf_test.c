@@ -54,7 +54,7 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%+i", 0);
 	TEST("%*i", 10, 5);
 	TEST("%'*i", 10, 5);
-	TEST("%'*i", 10, 5);
+	TEST("%'*i", -10, 5);
 	TEST("%hhi", 5);
 	TEST("%+hhi", 5987);
 	TEST("%'+'hhi", 8522);
@@ -116,7 +116,7 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%.*f", 12, (long double)6871435146546545);
 	TEST("%.*Lf", 12, (long double)68714351465445);
 	TEST("%#-*.*LF", 29, 12, (long double)68715146546545);
-	TEST("% +.*Lf", 12, (double)68715146546545);
+	TEST("% +.*Lf", 12, (long double)68715146546545);
 	TEST("% f", (double)68715146546545);
 	TEST("|%- +*.*F|", 30, 21, (long double)2.552997774654998741135);
 	TEST("%#; ;+;-';0;s", "--- b/B ---");
