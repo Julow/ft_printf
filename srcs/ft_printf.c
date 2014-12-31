@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft.h"
+#include <stdlib.h>
 
 static void		parsef(t_string *out, char *format, va_list *ap)
 {

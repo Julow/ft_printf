@@ -36,7 +36,7 @@ all:
 		make -j4 $(NAME); fi
 
 $(NAME): $(O_FILES)
-	$(eval FT_O = $(addprefix $(LIBFT)o/,$(shell ls -1 $(LIBFT)o | grep "\.o")))
+	$(eval FT_O = $(shell find -E libft/o -regex ".+\.o" -print))
 	@ar rcs $@ $(O_FILES) $(FT_O) && printf "\033[0;32m" || printf "\033[0;31m"
 	@printf "%-24s\033[1;30m<<--\033[0;0m\n" "$@"
 
@@ -60,12 +60,12 @@ debug: _debug all
 
 rebug: fclean debug
 
-test: re
-	mkdir -p $(O_DIR)
-	gcc printf_test.c -Wall -Wextra -L. -I. -lftprintf -o $(O_DIR)test_ftprintf
-	./$(O_DIR)test_ftprintf > $(O_DIR)a.diff
-	./$(O_DIR)test_ftprintf 2 > $(O_DIR)b.diff
-	diff -ayt -W 160 -- $(O_DIR)a.diff $(O_DIR)b.diff
+test: all
+	@mkdir -p $(O_DIR)
+	@gcc printf_test.c -L. -I. -lftprintf -o $(O_DIR)test_ftprintf
+	@./$(O_DIR)test_ftprintf > $(O_DIR)a.diff
+	@./$(O_DIR)test_ftprintf 2 > $(O_DIR)b.diff
+	@diff -ayt -W 160 -- $(O_DIR)a.diff $(O_DIR)b.diff
 
 _debug:
 	$(eval FLAGS = -Wall -Wextra -g)

@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-#define TEST(s, ...)	printf("\033[36m%s : \033[0m", s);fflush(stdout);_printf(s, ##__VA_ARGS__);printf("\n");
+#define TEST(s, ...)	printf("\033[36m%s :\033[0m ", s);fflush(stdout);printf(" \033[36m;\033[0m %d\n", _printf(s, ##__VA_ARGS__));fflush(stdout);
 
 static void		test(int (*_printf)(const char *format, ...))
 {
@@ -81,8 +81,10 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%c", 'c');
 	TEST("%c %c", 'F', 'Q');
 	TEST("%C %C", 'f', 'q');
-	TEST("%c %C", '\500', '\200');
-	TEST("%C %c", '\500', '\200');
+/*
+	TEST("%c %C", '\500', '\250');
+	TEST("%C %c", '\500', '\250');
+*/
 	TEST("%#; ;+;-';0;s", "---- n ----");
 	int			n;
 	TEST("123456789%n", &n);

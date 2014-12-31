@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft.h"
+#include <stdlib.h>
 
 /*
 ** sSdDioOuUxXcCnpeEfFbBrR

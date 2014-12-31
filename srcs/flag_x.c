@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft.h"
+#include <stdlib.h>
 
 void			flag_x(t_string *out, t_opt *opt, va_list *ap)
 {

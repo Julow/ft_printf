@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft.h"
+#include <stdlib.h>
 
 static void		stringaddcr(t_string *str, char r)
 {

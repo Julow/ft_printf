@@ -13,6 +13,7 @@
 #include "ft.h"
 #include <sys/types.h>
 #include <inttypes.h>
+#include <stddef.h>
 
 void			flag_n(t_string *out, t_opt *opt, va_list *ap)
 {

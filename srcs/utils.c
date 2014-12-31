@@ -22,13 +22,13 @@ void			add_string(t_string *out, char *add, int len, t_opt *opt)
 	center = ft_strrchr(opt->flags, '^');
 	center = (center > left) ? center : NULL;
 	left = (left > center) ? left : NULL;
-	if (left == NULL || center != NULL)
+	if ((left == NULL && opt->width > 0) || center != NULL)
 		ft_stringaddcn(out, fill, ((center != NULL) ? (opt->width - len) / 2 :
 			opt->width - len));
 	ft_stringaddl(out, add, len);
-	if (left != NULL || center != NULL)
-		ft_stringaddcn(out, fill, ((center != NULL) ? (opt->width - len) / 2 :
-			opt->width - len));
+	if (left != NULL || opt->width < 0 || center != NULL)
+		ft_stringaddcn(out, fill, ((center != NULL) ? (ABS(opt->width) - len)
+			/ 2 : ABS(opt->width) - len));
 }
 
 void			add_long(t_string *out, t_long add, t_opt *opt)
@@ -37,14 +37,11 @@ void			add_long(t_string *out, t_long add, t_opt *opt)
 	t_long			tmp;
 	char			str[LONG_BUFF];
 
-	ft_bzero(str, LONG_BUFF);
+	//ft_bzero(str, LONG_BUFF);
 	i = LONG_BUFF;
 	tmp = add;
 	if (add == 0)
-	{
 		str[--i] = '0';
-		i--;
-	}
 	while (i-- > 0 && add != 0)
 	{
 		str[i] = '0' + ((add < 0) ? -(add % 10) : add % 10);
@@ -56,7 +53,7 @@ void			add_long(t_string *out, t_long add, t_opt *opt)
 		str[i--] = (tmp < 0) ? '-' : '+';
 	else if (HASF(' '))
 		str[i--] = ' ';
-	add_string(out, str + i, LONG_BUFF - i, opt);
+	add_string(out, str + i + 1, LONG_BUFF - i - 1, opt);
 }
 
 void			clear_dis(t_opt *opt)

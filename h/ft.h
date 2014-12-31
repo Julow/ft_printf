@@ -16,7 +16,6 @@
 # include "libft.h"
 
 # include <stdarg.h>
-# include <stdlib.h>
 
 # define HASF(c)	(ft_strchr(opt->flags, (c)) != NULL)
 
