@@ -36,7 +36,7 @@ all:
 		make -j4 $(NAME); fi
 
 $(NAME): $(O_FILES)
-	$(eval FT_O = $(shell find -E libft/o -regex ".+\.o" -print))
+	$(eval FT_O = $(shell find $(LIBFT) -type f -print | grep "\.o"))
 	@ar rcs $@ $(O_FILES) $(FT_O) && printf "\033[0;32m" || printf "\033[0;31m"
 	@printf "%-24s\033[1;30m<<--\033[0;0m\n" "$@"
 
