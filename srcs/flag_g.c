@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_f.c                                           :+:      :+:    :+:   */
+/*   flag_g.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/09 17:24:15 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/09 17:24:16 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/31 17:20:17 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/31 17:20:18 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 #include <stdlib.h>
 
-void			flag_f(t_string *out, t_opt *opt, va_list *ap)
+void			flag_g(t_string *out, t_opt *opt, va_list *ap)
 {
-	long double		f;
+	long double		g;
 	t_string		str;
 
-	f = get_float_arg(opt, ap);
+	g = get_float_arg(opt, ap);
 	ft_stringini(&str);
-	if (HASF('+') && f >= 0)
+	if (HASF('+') && g >= 0)
 		ft_stringaddc(&str, '+');
-	else if (HASF(' ') && f >= 0)
+	else if (HASF(' ') && g >= 0)
 		ft_stringaddc(&str, ' ');
-	ft_stringaddd(&str, f, (opt->preci_set) ? opt->preci : 6);
+	ft_stringaddd(&str, g, (opt->preci_set) ? opt->preci : 6);
+	ft_stringtrimc(&str, "0.");
 	add_string(out, str.content, str.length, opt);
 	free(str.content);
 }

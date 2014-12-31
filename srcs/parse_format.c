@@ -14,7 +14,7 @@
 #include <stdlib.h>
 
 /*
-** sSdDioOuUxXcCnpeEfFbBrR
+** sSdDioOuUxXcCnpeEfFbBrRgG
 ** %%
 ** 0, ,-,+,#,^,'
 ** width,*
@@ -23,7 +23,7 @@
 ** =============
 ** =============
 ** $
-** gGaA
+** aA
 ** k
 */
 t_format		g_formats[] = {
@@ -51,6 +51,8 @@ t_format		g_formats[] = {
 	{'B', &flag_b, "+ "},
 	{'r', &flag_r, "+ "},
 	{'R', &flag_r, "+ "},
+	{'g', &flag_g, ""},
+	{'G', &flag_g, ""},
 	{'\0', NULL, NULL}
 };
 
@@ -70,20 +72,20 @@ char			*g_lengths[] = {
 	NULL
 };
 
-static int		parse_flags(t_opt *opt, char *format)
+static int		parse_flags(t_opt *opt, const char *format)
 {
 	int				i;
 
 	i = 0;
 	while (format[i] == '#' || format[i] == ' ' || format[i] == '0'
 		|| format[i] == '-' || format[i] == '+' || format[i] == '\''
-		|| format[i] == '^' || format[i] == ';')
+		|| format[i] == '^' || is_separator(format[i]))
 		i++;
 	opt->flags = ft_strsub(format, 0, i);
 	return (i);
 }
 
-static int		parse_width(t_opt *opt, char *format, va_list *ap)
+static int		parse_width(t_opt *opt, const char *format, va_list *ap)
 {
 	int				length;
 
@@ -98,36 +100,39 @@ static int		parse_width(t_opt *opt, char *format, va_list *ap)
 		opt->width = (int)(va_arg(*ap, int));
 		length++;
 	}
-	while (format[length] == ';')
+	while (is_separator(format[length]))
 		length++;
 	return (length);
 }
 
-static int		parse_precision(t_opt *opt, char *format, va_list *ap)
+static int		parse_precision(t_opt *opt, const char *format, va_list *ap)
 {
 	int				length;
 
-	opt->preci = -1;
 	if (*format != '.')
-		return (0);
-	length = 0;
-	while (*(++format) == '.')
+		return (opt->preci_set = FALSE, opt->preci = 0, 0);
+	length = 1;
+	while (format[length] == '.')
 		length++;
-	while (ft_isdigit(format[length]))
-		length++;
-	if (length > 0)
-		opt->preci = ft_atoin(format, length);
-	else if (format[0] == '*')
+	if (format[length] == '*')
 	{
 		opt->preci = (int)(va_arg(*ap, int));
 		length++;
 	}
-	while (format[length] == ';')
+	else
+	{
+		while (format[length] == '-')
+			length++;
+		opt->preci = ft_atoi(format + length - ((format[length - 1] == '-') ? 1 : 0));
+		while (ft_isdigit(format[length]))
+			length++;
+	}
+	while (is_separator(format[length]))
 		length++;
-	return (length + 1);
+	return (opt->preci_set = TRUE, length);
 }
 
-static int		parse_length(t_opt *opt, char *format)
+static int		parse_length(t_opt *opt, const char *format)
 {
 	int				i;
 	int				len;
@@ -139,7 +144,7 @@ static int		parse_length(t_opt *opt, char *format)
 		if (ft_strnequ(g_lengths[i], format, len))
 		{
 			opt->length = g_lengths[i];
-			while (format[len] == ';')
+			while (is_separator(format[len]))
 				len++;
 			return (len);
 		}
@@ -148,7 +153,7 @@ static int		parse_length(t_opt *opt, char *format)
 	return (0);
 }
 
-int				parse_format(t_string *out, char *format, va_list *ap)
+int				parse_format(t_string *out, const char *format, va_list *ap)
 {
 	int				length;
 	int				i;

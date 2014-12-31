@@ -20,7 +20,13 @@ void			flag_e(t_string *out, t_opt *opt, va_list *ap)
 
 	e = get_float_arg(opt, ap);
 	ft_stringini(&str);
-	stringaddde(&str, e, (opt->preci < 0) ? 6 : opt->preci, opt);
+	if (HASF('+') && e >= 0)
+		ft_stringaddc(&str, '+');
+	else if (HASF(' ') && e >= 0)
+		ft_stringaddc(&str, ' ');
+	ft_stringaddde(&str, e, (opt->preci_set) ? opt->preci : 6);
+	if (opt->format->name == 'E')
+		ft_stringrepc(&str, 'e', 'E');
 	add_string(out, str.content, str.length, opt);
 	free(str.content);
 }

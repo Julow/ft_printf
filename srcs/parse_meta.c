@@ -78,7 +78,7 @@ t_meta			g_metas[] = {
 	{NULL, NULL},
 };
 
-int				parse_meta(t_string *out, char *format)
+int				parse_meta(t_string *out, const char *format)
 {
 	int				i;
 	int				length;

@@ -33,6 +33,7 @@ typedef struct	s_opt
 	char			*flags;
 	int				width;
 	int				preci;
+	t_bool			preci_set;
 	char const		*length;
 	t_format		*format;
 }				t_opt;
@@ -46,27 +47,21 @@ typedef struct	s_meta
 /*
 ** parse_format.c
 */
-int				parse_format(t_string *out, char *format, va_list *ap);
+int				parse_format(t_string *out, const char *format, va_list *ap);
 
 /*
 ** parse_meta.c
 */
-int				parse_meta(t_string *out, char *format);
-
-/*
-** dutils.c
-*/
-void			stringaddid(t_string *str, long double nbr);
-void			stringaddd(t_string *str, long double d, int preci, t_opt *opt);
-void			stringaddde(t_string *str, long double d, int pre, t_opt *opt);
+int				parse_meta(t_string *out, const char *format);
 
 /*
 ** utils.c
 */
-void			add_string(t_string *out, char *add, int len, t_opt *opt);
+void			add_string(t_string *out, const char *add, int len, t_opt *opt);
 void			add_long(t_string *out, t_long add, t_opt *opt);
+t_bool			is_separator(char c);
 void			clear_dis(t_opt *opt);
-int				ft_atoin(char *str, int len);
+int				ft_atoin(const char *str, int len);
 
 /*
 ** argsutils.c
@@ -91,5 +86,6 @@ void			flag_e(t_string *out, t_opt *opt, va_list *ap);
 void			flag_f(t_string *out, t_opt *opt, va_list *ap);
 void			flag_b(t_string *out, t_opt *opt, va_list *ap);
 void			flag_r(t_string *out, t_opt *opt, va_list *ap);
+void			flag_g(t_string *out, t_opt *opt, va_list *ap);
 
 #endif

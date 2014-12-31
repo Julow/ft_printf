@@ -12,7 +12,7 @@
 
 #include "ft.h"
 
-void			add_string(t_string *out, char *add, int len, t_opt *opt)
+void			add_string(t_string *out, const char *add, int len, t_opt *opt)
 {
 	char			*left;
 	char			*center;
@@ -37,7 +37,6 @@ void			add_long(t_string *out, t_long add, t_opt *opt)
 	t_long			tmp;
 	char			str[LONG_BUFF];
 
-	//ft_bzero(str, LONG_BUFF);
 	i = LONG_BUFF;
 	tmp = add;
 	if (add == 0)
@@ -56,6 +55,11 @@ void			add_long(t_string *out, t_long add, t_opt *opt)
 	add_string(out, str + i + 1, LONG_BUFF - i - 1, opt);
 }
 
+t_bool			is_separator(char c)
+{
+	return ((c == ',' || c == ';' || c == ':' || c == '_') ? TRUE : FALSE);
+}
+
 void			clear_dis(t_opt *opt)
 {
 	int				i;
@@ -66,7 +70,7 @@ void			clear_dis(t_opt *opt)
 			opt->flags[i] = ';';
 }
 
-int				ft_atoin(char *str, int len)
+int				ft_atoin(const char *str, int len)
 {
 	int				nb;
 	int				sign;
