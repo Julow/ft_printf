@@ -12,13 +12,31 @@
 
 #include "ft.h"
 
+static void		add_ulong(t_string *out, t_ulong add, t_opt *opt)
+{
+	int				i;
+	char			str[LONG_BUFF];
+
+	i = LONG_BUFF;
+	if (add == 0)
+		str[--i] = '0';
+	while (i-- > 0 && add != 0)
+	{
+		str[i] = '0' + add % 10;
+		if (((LONG_BUFF - i + 1) % 4) == 0 && HASF('\''))
+			str[--i] = ' ';
+		add /= 10;
+	}
+	add_string(out, str + i + 1, LONG_BUFF - i - 1, opt);
+}
+
 void			flag_u(t_string *out, t_opt *opt, va_list *ap)
 {
-	t_long			u;
+	t_ulong			u;
 
 	if (opt->format->name == 'U')
-		u = (t_long)(va_arg(*ap, unsigned long));
+		u = (t_ulong)(va_arg(*ap, unsigned long));
 	else
 		u = get_unsigned_arg(opt, ap);
-	add_long(out, u, opt);
+	add_ulong(out, u, opt);
 }

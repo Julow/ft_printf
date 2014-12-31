@@ -15,7 +15,7 @@
 
 void			flag_o(t_string *out, t_opt *opt, va_list *ap)
 {
-	t_long			o;
+	t_ulong			o;
 	char			*octal;
 	t_string		tmp;
 

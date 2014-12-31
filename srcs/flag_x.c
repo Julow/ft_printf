@@ -16,7 +16,7 @@
 void			flag_x(t_string *out, t_opt *opt, va_list *ap)
 {
 	char			*hex;
-	t_long			x;
+	t_ulong			x;
 	t_string		tmp;
 
 	x = get_unsigned_arg(opt, ap);
