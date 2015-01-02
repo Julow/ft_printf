@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:23:37 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/27 11:23:38 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/02 18:40:32 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,24 @@
 # include "libft.h"
 
 # include <stdarg.h>
+# include <wchar.h>
 
 # define HASF(c)	(ft_strchr(opt->flags, (c)) != NULL)
 
 # define LONG_BUFF	(40)
+
+typedef union	u_ldouble
+{
+	struct
+	{
+		t_ulong			fract:64;
+		t_uint			e:15;
+		t_bool			sign:1;
+	}				b;
+	long double		d;
+}				t_ldouble;
+
+# define EXP(d)		(((t_ldouble)(d)).b.e)
 
 typedef struct	s_format
 {
@@ -62,6 +76,12 @@ void			add_long(t_string *out, t_long add, t_opt *opt);
 t_bool			is_separator(char c);
 void			clear_dis(t_opt *opt);
 int				ft_atoin(const char *str, int len);
+
+/*
+** wutils.c
+*/
+t_uint			ft_wstrlen(wchar_t *wstr);
+void			compress_wstr(char *dst, wchar_t *src);
 
 /*
 ** argsutils.c

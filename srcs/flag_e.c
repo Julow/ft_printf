@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 17:11:25 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/09 17:11:25 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/02 16:24:38 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void			flag_e(t_string *out, t_opt *opt, va_list *ap)
 		ft_stringaddc(&str, ' ');
 	ft_stringaddde(&str, e, (opt->preci_set) ? opt->preci : 6);
 	if (opt->format->name == 'E')
-		ft_stringrepc(&str, 'e', 'E');
+		ft_strupper(str.content);
 	add_string(out, str.content, str.length, opt);
 	free(str.content);
 }

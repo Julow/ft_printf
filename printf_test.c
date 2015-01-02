@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   printf_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 18:39:19 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/09 18:39:20 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/02 16:21:46 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
+#include <math.h>
 
 #define TEST(s, ...)	printf("\033[36m%s :\033[0m ", s);fflush(stdout);printf(" \033[36m;\033[0m %d\n", _printf(s, ##__VA_ARGS__));fflush(stdout);
 
@@ -123,6 +124,7 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("% +.*Le", 12, (long double)68715146546545);
 	TEST("%+ .*Le", 12, (long double)68715146546545);
 	TEST("% .*Le", 12, (long double)68715146546545);
+	TEST("% .*e", 12, NAN);
 	TEST("% E", (double)68715146546545);
 	TEST("|%- +*.*Le|", 30, 21, (long double)2.552997774654998741135);
 	TEST("%#; ;+;-';0;s", "--- f/F ---");
@@ -130,6 +132,7 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%.*f", 12, 5.9987445633);
 	TEST("%.0f", 5.83);
 	TEST("%.*f", 12, 5.3);
+	TEST("%.*f", 12, NAN);
 	TEST("%.*f", 12, (long double)6871435146546545);
 	TEST("%.*Lf", 12, (long double)68714351465445);
 	TEST("%.-5Lf", (long double)68714351465445.99);
@@ -147,6 +150,7 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%.*Lg", 12, (long double)5.9987445633);
 	TEST("%+ .*LG", 12, (long double)5.9987445633);
 	TEST("% .*LG", 12, (long double)5.9987445633);
+	TEST("% .*G", 12, NAN);
 	TEST("% G", (double)68715146546545.2);
 }
 

@@ -6,12 +6,11 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 13:11:08 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/27 13:11:09 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/02 18:37:57 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
-#include <wchar.h>
 
 static void		add_nchar(t_string *out, char c, int len, t_opt *opt)
 {
@@ -21,15 +20,37 @@ static void		add_nchar(t_string *out, char c, int len, t_opt *opt)
 	add_string(out, str, len, opt);
 }
 
+static void		flag_ws(t_string *out, t_opt *opt, wchar_t *wstr)
+{
+	const int		len = ft_wstrlen(wstr);
+	char			str[len + 1];
+	int				length = len;
+
+	if (wstr == NULL)
+	{
+		add_string(out, "(null)", 6, opt);
+		return ;
+	}
+	compress_wstr(str, wstr);
+	if (opt->preci_set && length > opt->preci)
+		length = opt->preci;
+	if (opt->preci_set && opt->preci < 0)
+		add_nchar(out, ' ', ABS(length), opt);
+	else
+		add_string(out, str, length, opt);
+}
+
 void			flag_s(t_string *out, t_opt *opt, va_list *ap)
 {
 	char			*str;
 	int				length;
 
 	if (opt->format->name == 'S' || ft_strequ(opt->length, "l"))
-		str = (char*)va_arg(*ap, wchar_t*);
-	else
-		str = va_arg(*ap, char*);
+	{
+		flag_ws(out, opt, va_arg(*ap, wchar_t*));
+		return ;
+	}
+	str = va_arg(*ap, char*);
 	if (str == NULL)
 	{
 		add_string(out, "(null)", 6, opt);

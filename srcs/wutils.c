@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_c.c                                           :+:      :+:    :+:   */
+/*   wutils.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/27 15:27:34 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/02 18:38:00 by jaguillo         ###   ########.fr       */
+/*   Created: 2015/01/02 17:45:40 by jaguillo          #+#    #+#             */
+/*   Updated: 2015/01/02 18:37:54 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-void			flag_c(t_string *out, t_opt *opt, va_list *ap)
+t_uint			ft_wstrlen(wchar_t *wstr)
 {
-	char			c;
+	t_uint			i;
 
-	if (opt->format->name == 'C' || ft_strequ(opt->length, "l"))
-		c = (char)(t_uchar)(t_uint)va_arg(*ap, wint_t);
-	else
-		c = (char)va_arg(*ap, int);
-	add_string(out, &c, 1, opt);
+	if (wstr == NULL)
+		return (0);
+	i = 0;
+	while (wstr[i] != '\0')
+		i++;
+	return (i);
+}
+
+void			compress_wstr(char *dst, wchar_t *src)
+{
+	while (*src != '\0')
+	{
+		*((t_byte*)dst) = *((t_byte*)src);
+		src++;
+		dst++;
+	}
+	*dst = '\0';
 }
