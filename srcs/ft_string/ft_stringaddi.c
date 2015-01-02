@@ -10,30 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_internal.h"
 
 /*
 ** Add the string representation of 'nbr' in the string 'str'
 */
 void			ft_stringaddi(t_string *str, int nbr)
 {
-	char			nb[10];
-	int				tmp;
+	char			nb[PUTNBR_BUFF];
 	t_uint			i;
-	t_uint			len;
 
-	tmp = nbr;
-	len = (nbr < 0) ? 2 : 1;
-	while ((tmp /= 10) != 0)
-		len++;
-	tmp = nbr;
-	i = len;
-	while (i-- > 0)
+	i = PUTNBR_BUFF;
+	nb[0] = (nbr < 0) ? '-' : '+';
+	if (nbr <= 0)
 	{
-		nb[i] = '0' + ((nbr < 0) ? -(tmp % 10) : tmp % 10);
-		tmp /= 10;
+		nb[--i] = '0' - (nbr % 10);
+		nbr /= -10;
 	}
-	if (nbr < 0)
-		nb[0] = '-';
-	ft_stringaddl(str, nb, len);
+	while (nbr != 0)
+	{
+		nb[--i] = '0' + (nbr % 10);
+		nbr /= 10;
+	}
+	if (nb[0] == '-')
+		nb[--i] = '-';
+	ft_stringaddl(str, nb + i, PUTNBR_BUFF - i);
 }

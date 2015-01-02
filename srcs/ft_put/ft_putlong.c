@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   srcs/ft_malloc.c                                   :+:      :+:    :+:   */
+/*   ft_putlong.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juloo <juloo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/07 15:39:27 by juloo             #+#    #+#             */
-/*   Updated: 2014/12/07 15:39:27 by juloo            ###   ########.fr       */
+/*   Created: 2015/01/01 18:51:45 by jaguillo          #+#    #+#             */
+/*   Updated: 2015/01/01 18:51:45 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-void			*ft_malloc(t_uint size)
+int				ft_putlong(t_long n)
 {
-	return (malloc(size));
+	return (ft_putlong_fd(n, 1));
 }

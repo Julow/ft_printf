@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft.h                                               :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 11:52:52 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/03 11:52:56 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/02 16:25:42 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# define MAL(t,l)		((t*)ft_malloc(sizeof(t) * (l)))
-# define MAL1(t)		((t*)ft_malloc(sizeof(t)))
+# define MAL(t,l)		((t*)malloc(sizeof(t) * (l)))
+# define MAL1(t)		((t*)malloc(sizeof(t)))
 
 # define S(t,l)			(sizeof(t) * (l))
 
@@ -45,6 +45,8 @@
 # define MIX(a,b,p)		((a) - BTOI((a) * (p)) + BTOI((b) * (p)))
 
 # define IGNORE(f)		((void)((f) + 1))
+
+# define ISNAN(d)		((d) != (d))
 
 # ifndef TRUE
 #  define TRUE			1
@@ -175,14 +177,13 @@ typedef struct	s_pos
 /*
 ** Memory
 */
-void			*ft_malloc(t_uint size);
-
 void			ft_bzero(void *s, t_uint n);
 t_ulong			*ft_memalign(void *mem, const void *data, t_uint *len);
 void			*ft_memset(void *b, int c, t_uint len);
 void			*ft_memcpy(void *dst, const void *src, t_uint len);
 void			*ft_memccpy(void *dst, const void *src, int c, t_uint n);
 void			*ft_memmove(void *dst, const void *src, t_uint len);
+void			*ft_memdup(const void *src, t_uint len);
 void			ft_memswap(void *mem1, void *mem2, t_uint len);
 void			*ft_memchr(const void *s, int c, t_uint n);
 int				ft_memcmp(const void *s1, const void *s2, t_uint n);
@@ -198,6 +199,7 @@ t_uint			ft_tablen(void **array);
 char			*ft_strnew(t_uint size);
 t_uint			ft_strlen(const char *str);
 char			*ft_strdup(const char *src);
+char			*ft_strndup(const char *src, t_uint len);
 char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strncpy(char *dst, const char *src, t_uint len);
 char			*ft_strsub(const char *s, t_uint start, t_uint len);
@@ -226,7 +228,8 @@ t_bool			ft_isnumber(const char *str);
 /*
 ** String search
 */
-char			*ft_strchr(const char *s, int c);
+char			*ft_strchr(const char *s, char c);
+char			*ft_strnchr(const char *s, char c, int len);
 int				ft_strchri(const char *str, char c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strstr(const char *s1, const char *s2);
@@ -275,18 +278,20 @@ void			ft_strupper(char *str);
 /*
 ** Write
 */
-void			ft_putchar(char c);
-void			ft_putnchar(char c, int n);
-void			ft_putstr(const char *s);
-void			ft_putlstr(const char *s, int len);
-void			ft_putendl(const char *s);
-void			ft_putnbr(int n);
-void			ft_putchar_fd(char c, int fd);
-void			ft_putnchar_fd(char c, int n, int fd);
-void			ft_putstr_fd(const char *s, int fd);
-void			ft_putlstr_fd(const char *s, int len, int fd);
-void			ft_putendl_fd(const char *s, int fd);
-void			ft_putnbr_fd(int n, int fd);
+int				ft_putchar(char c);
+int				ft_putnchar(char c, int n);
+int				ft_putstr(const char *s);
+int				ft_putlstr(const char *s, int len);
+int				ft_putendl(const char *s);
+int				ft_putnbr(int n);
+int				ft_putlong(t_long n);
+int				ft_putchar_fd(char c, int fd);
+int				ft_putnchar_fd(char c, int n, int fd);
+int				ft_putstr_fd(const char *s, int fd);
+int				ft_putlstr_fd(const char *s, int len, int fd);
+int				ft_putendl_fd(const char *s, int fd);
+int				ft_putnbr_fd(int n, int fd);
+int				ft_putlong_fd(t_long n, int fd);
 
 /*
 ** Store mem using the struct s_list (t_list)
