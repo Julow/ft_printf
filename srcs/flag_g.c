@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/31 17:20:17 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/02 16:24:17 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/02 18:47:58 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void			flag_g(t_string *out, t_opt *opt, va_list *ap)
 		ft_stringaddc(&str, '+');
 	else if (HASF(' ') && g >= 0)
 		ft_stringaddc(&str, ' ');
-	if (EXP(g) >= -4 && EXP(g) < opt->preci)
-		ft_stringaddd(&str, g, opt->preci);
-	else
+	if (EXP(g) < -4 || EXP(g) >= opt->preci)
 	{
 		ft_stringaddde(&str, g, opt->preci);
-		if (opt->format->name == 'G')
-			ft_strupper(str.content);
 	}
+	else
+		ft_stringaddd(&str, g, opt->preci);
+	if (opt->format->name == 'G')
+		ft_strupper(str.content);
 	ft_stringtrimc(&str, "0.");
 	add_string(out, str.content, str.length, opt);
 	free(str.content);
