@@ -15,4 +15,7 @@
 
 # include "libft.h"
 
+# define PUTNBR_BUFF	11
+# define PUTLONG_BUFF	21
+
 #endif
