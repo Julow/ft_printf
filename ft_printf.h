@@ -6,12 +6,18 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/26 13:40:48 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/26 13:40:49 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/04 23:27:18 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+
+# ifdef DEBUG_MODE
+#  define DEBUG(d, ...) ft_printf_fd(2, d, ##__VA_ARGS__)
+# else
+#  define DEBUG(d, ...)
+# endif
 
 /*
 ** =============
