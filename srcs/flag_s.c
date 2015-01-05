@@ -6,19 +6,11 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 13:11:08 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/02 18:37:57 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/05 17:56:24 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
-
-static void		add_nchar(t_string *out, char c, int len, t_opt *opt)
-{
-	char			str[len];
-
-	ft_memset(str, c, len);
-	add_string(out, str, len, opt);
-}
 
 static void		flag_ws(t_string *out, t_opt *opt, wchar_t *wstr)
 {

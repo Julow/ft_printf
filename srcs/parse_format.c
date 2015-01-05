@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:29:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/05 17:36:11 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/05 18:04:23 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ t_format		g_formats[] = {
 	{'b', &flag_b, "+ "},
 	{'B', &flag_b, "+ "},
 	{'r', &flag_r, "+ "},
-	{'R', &flag_r, "+ "},
 	{'g', &flag_g, ""},
 	{'G', &flag_g, ""},
 	{'\0', NULL, NULL}
@@ -177,6 +176,7 @@ int				parse_format(t_string *out, const char *format, va_list *ap)
 			return (length + 1);
 		}
 	}
+	add_string(out, format + length, 1, &opt);
 	free(opt.flags);
-	return (length);
+	return (length + 1);
 }
