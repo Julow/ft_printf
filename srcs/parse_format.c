@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:29:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/05 18:04:23 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/05 18:10:21 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,11 +172,10 @@ int				parse_format(t_string *out, const char *format, va_list *ap)
 			opt.format = g_formats + i;
 			clear_dis(&opt);
 			g_formats[i].func(out, &opt, ap);
-			free(opt.flags);
-			return (length + 1);
+			return (free(opt.flags), length + 1);
 		}
 	}
-	add_string(out, format + length, 1, &opt);
-	free(opt.flags);
-	return (length + 1);
+	if (format[length] != '\0')
+		add_string(out, format + (length++), 1, &opt);
+	return (free(opt.flags), length);
 }

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 18:39:19 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/05 18:05:34 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/05 18:14:23 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("lol%s", "Hello");
 	TEST("%#; ;+;-';0;s", "---- %% ----");
 	TEST("%%");
+	TEST("%");
 	TEST("%30%");
 	TEST("% -30%.");
 	TEST("%.0%");
@@ -54,11 +55,15 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("-20 = %i;", -20);
 	TEST("20 = %i;", 20);
 	TEST("%D", 0);
+	TEST("{%09d}", -887);
+	TEST("{%0-4d}", -5);
 	TEST("%zd", 0);
 	TEST("%zd", 50);
 	TEST("%zd", 190);
 	TEST("%yd", 190);
 	TEST("%i", -2);
+	TEST("%.4i", -2);
+	TEST("%.8i", 16);
 	TEST("%+D", 9984465411154);
 	TEST("%+'D", 9984465411154);
 	TEST("%-22.5i", 9984465411154);
@@ -89,6 +94,8 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%#; ;+;-';0;s", "--- u/U ---");
 	TEST("%u", 5588);
 	TEST("%u", -5588);
+	TEST("%.4u", 5);
+	TEST("%.8u", 16);
 	TEST("% u", 0);
 	TEST("%+u", 0);
 	TEST(">>%u<<", 3000000000);
