@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/26 13:40:48 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/05 16:41:36 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/05 17:27:43 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 ** =============
 ** A format sequence be like:
 **    %[flags][width][.precision]format
-** flags can be 0 or more: '#', ' ', '-', '+', '^', '0', ''', '>'
+** flags can be 0 or more: '#', ' ', '-', '+', '^', '0', ''', '>', 'm', 'M', 'T'
 ** width is a positive integer
 ** precision is a positive integer or '*', precision start with '.'
 ** format can be one of "%sSdDoOuUxXicCnp"

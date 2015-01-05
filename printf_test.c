@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 18:39:19 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/05 16:44:40 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/05 17:43:58 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%s", "");
 	TEST("%.8s", "");
 	TEST("test %-8s", "test test test");
+	TEST("test %MT-8s", "test test test");
+	TEST("trim %>T10s", "      		\n	\t OK			\t \n \f ");
+	TEST("min  %>m10s", "LofgUIHjhbdfKJBJHVBDFGKJ65123");
+	TEST("MAJ  %>M10s", "afdhoihOI:HSKLFJGHjgldnhlgh5406");
 	TEST("test %>13s", "test test test");
 	TEST("%.8s", "test test test");
 	TEST("%.0s", "test test test");

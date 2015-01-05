@@ -6,17 +6,30 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/26 19:47:13 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/05 16:44:09 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/05 17:38:43 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
+
+static int		str_trans(char *dst, const char *src, int len, t_opt *opt)
+{
+	ft_memmove(dst, src, len);
+	if (ft_strrchr(opt->flags, 'T') != NULL)
+		len = ft_strtrim2(dst, len, " \t\n\r\f");
+	if (ft_strrchr(opt->flags, 'M') != NULL)
+		ft_strupper(dst);
+	else if (ft_strrchr(opt->flags, 'm') != NULL)
+		ft_strlower(dst);
+	return (len);
+}
 
 void			add_string(t_string *out, const char *add, int len, t_opt *opt)
 {
 	char			*left;
 	char			*center;
 	char			*start;
+	char			tmp[len];
 	char const		fill = (!HASF('0')) ? ' ' : '0';
 
 	left = ft_strrchr(opt->flags, '-');
@@ -25,12 +38,13 @@ void			add_string(t_string *out, const char *add, int len, t_opt *opt)
 	center = (center > left && center > start) ? center : NULL;
 	left = (left > center && left > start) ? left : NULL;
 	start = (start > center && start > left) ? start : NULL;
+	len = str_trans(tmp, add, len, opt);
 	if ((left == NULL && opt->width > 0 && start == NULL) || center != NULL)
 		ft_stringaddcn(out, fill, ((center != NULL) ? (opt->width - len) / 2 :
 			opt->width - len));
 	else if (start != NULL)
 		ft_stringaddcn(out, fill, opt->width - out->length);
-	ft_stringaddl(out, add, len);
+	ft_stringaddl(out, tmp, len);
 	if (left != NULL || opt->width < 0 || center != NULL)
 		ft_stringaddcn(out, fill, ((center != NULL) ? (ABS(opt->width) - len)
 			/ 2 : ABS(opt->width) - len));
@@ -73,27 +87,4 @@ void			clear_dis(t_opt *opt)
 	while (opt->flags[++i] != '\0')
 		if (ft_strchr(opt->format->disabled, opt->flags[i]))
 			opt->flags[i] = ';';
-}
-
-int				ft_atoin(const char *str, int len)
-{
-	int				nb;
-	int				sign;
-
-	sign = 1;
-	nb = 0;
-	if (*str == '-')
-	{
-		sign = -1;
-		str++;
-		len--;
-	}
-	else if (*str == '+')
-	{
-		len--;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9' && len-- > 0)
-		nb = nb * 10 + (*(str++) - '0');
-	return (nb * sign);
 }

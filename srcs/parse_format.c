@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:29:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/05 16:41:46 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/05 17:36:11 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*
 ** sSdDioOuUxXcCnpeEfFbBrRgG
 ** %%
-** 0, ,-,+,#,^,',>
+** 0, ,-,+,#,^,',>,m,M,T
 ** width,*
 ** precision,*
 ** hh,h,ll,l,L,j,t,z,q
@@ -79,7 +79,8 @@ static int		parse_flags(t_opt *opt, const char *format)
 	i = 0;
 	while (format[i] == '#' || format[i] == ' ' || format[i] == '0'
 		|| format[i] == '-' || format[i] == '+' || format[i] == '\''
-		|| format[i] == '^' || format[i] == '>' || is_separator(format[i]))
+		|| format[i] == '^' || format[i] == '>' || format[i] == 'm'
+		|| format[i] == 'M' || format[i] == 'T' || is_separator(format[i]))
 		i++;
 	opt->flags = ft_strsub(format, 0, i);
 	return (i);
