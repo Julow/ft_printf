@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 18:39:19 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/02 16:21:46 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/05 16:44:40 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%s", "test test test");
 	TEST("%s", "");
 	TEST("%.8s", "");
+	TEST("test %-8s", "test test test");
+	TEST("test %>13s", "test test test");
 	TEST("%.8s", "test test test");
 	TEST("%.0s", "test test test");
 	TEST("%.-0s", "test test test");
@@ -48,6 +50,10 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("-20 = %i;", -20);
 	TEST("20 = %i;", 20);
 	TEST("%D", 0);
+	TEST("%zd", 0);
+	TEST("%zd", 50);
+	TEST("%zd", 190);
+	TEST("%yd", 190);
 	TEST("%i", -2);
 	TEST("%+D", 9984465411154);
 	TEST("%+'D", 9984465411154);
@@ -92,10 +98,8 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%.--1c", 'c');
 	TEST("%c %c", 'F', 'Q');
 	TEST("%C %C", 'f', 'q');
-/*
-	TEST("%c %C", '\500', '\250');
-	TEST("%C %c", '\500', '\250');
-*/
+	TEST("%C %C", L'ä', L'è');
+	TEST("%C %C", L'ä', L'è');
 	TEST("%#; ;+;-';0;s", "---- n ----");
 	int			n;
 	TEST("123456789%n", &n);
@@ -114,6 +118,8 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("ll %p", ((unsigned long long int)p) * 10);
 	TEST("%#; ;+;-';0;s", "--- e/E ---");
 	TEST("%e", 5.9987445633);
+	TEST("%e", 3);
+	TEST("%e", -0);
 	TEST("%.*e", 12, 5.9987445633);
 	TEST("%.*e", 12, 5.3);
 	TEST("%.0e", 5.83);
@@ -130,6 +136,8 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%#; ;+;-';0;s", "--- f/F ---");
 	TEST("%F", 5.9987445633);
 	TEST("%.*f", 12, 5.9987445633);
+	TEST("%f", 3.0);
+	TEST("%F", -0.0);
 	TEST("%.0f", 5.83);
 	TEST("%.*f", 12, 5.3);
 	TEST("%.*f", 12, NAN);

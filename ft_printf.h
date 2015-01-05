@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/26 13:40:48 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/04 23:27:18 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/05 16:41:36 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 
 # ifdef DEBUG_MODE
-#  define DEBUG(d, ...) ft_printf_fd(2, d, ##__VA_ARGS__)
+#  define DEBUG(d, ...) ft_fdprintf(2, d, ##__VA_ARGS__)
 # else
 #  define DEBUG(d, ...)
 # endif
@@ -23,7 +23,7 @@
 ** =============
 ** A format sequence be like:
 **    %[flags][width][.precision]format
-** flags can be 0 or more: '#', ' ', '-', '+', '^', '0', '''
+** flags can be 0 or more: '#', ' ', '-', '+', '^', '0', ''', '>'
 ** width is a positive integer
 ** precision is a positive integer or '*', precision start with '.'
 ** format can be one of "%sSdDoOuUxXicCnp"
@@ -44,6 +44,6 @@
 ** Return the total of char printed.
 */
 int				ft_printf(const char *format, ...);
-int				ft_printf_fd(const int fd, const char *format, ...);
+int				ft_fdprintf(const int fd, const char *format, ...);
 
 #endif

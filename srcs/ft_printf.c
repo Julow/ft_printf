@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/26 13:34:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/26 13:34:32 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/05 16:32:10 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				ft_printf(const char *format, ...)
 	return (output.length);
 }
 
-int				ft_printf_fd(const int fd, const char *format, ...)
+int				ft_fdprintf(const int fd, const char *format, ...)
 {
 	t_string		output;
 	va_list			ap;

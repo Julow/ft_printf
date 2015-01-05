@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/02 17:27:23 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/02 17:27:24 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/05 16:20:06 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_long			get_arg(t_opt *opt, va_list *ap)
 	if (ft_strequ(opt->length, "t") || ft_strequ(opt->length, "I"))
 		return ((t_long)(va_arg(*ap, ptrdiff_t)));
 	if (ft_strequ(opt->length, "z"))
-		return ((t_long)(va_arg(*ap, size_t)));
+		return ((t_long)(va_arg(*ap, long)));
 	if (ft_strequ(opt->length, "q") || ft_strequ(opt->length, "I64"))
 		return ((t_long)(va_arg(*ap, quad_t)));
 	return ((t_long)(va_arg(*ap, int)));

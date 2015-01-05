@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/26 15:52:17 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/26 15:52:17 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/05 15:27:20 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,22 @@
 
 void			flag_n(t_string *out, t_opt *opt, va_list *ap)
 {
-	int				*n;
-
 	if (ft_strequ(opt->length, "hh"))
-		n = (int*)(signed char*)(va_arg(*ap, int*));
+		*(va_arg(*ap, signed char*)) = out->length;
 	else if (ft_strequ(opt->length, "h"))
-		n = (int*)(short*)(va_arg(*ap, int*));
+		*(va_arg(*ap, short*)) = out->length;
 	else if (ft_strequ(opt->length, "ll"))
-		n = (int*)(va_arg(*ap, unsigned long long*));
+		*(va_arg(*ap, unsigned long long*)) = out->length;
 	else if (ft_strequ(opt->length, "l"))
-		n = (int*)(va_arg(*ap, unsigned long*));
+		*(va_arg(*ap, unsigned long*)) = out->length;
 	else if (ft_strequ(opt->length, "j"))
-		n = (int*)(va_arg(*ap, uintmax_t*));
+		*(va_arg(*ap, uintmax_t*)) = out->length;
 	else if (ft_strequ(opt->length, "t"))
-		n = (int*)(va_arg(*ap, ptrdiff_t*));
+		*(va_arg(*ap, ptrdiff_t*)) = out->length;
 	else if (ft_strequ(opt->length, "z"))
-		n = (int*)(va_arg(*ap, size_t*));
+		*(va_arg(*ap, long int*)) = out->length;
 	else if (ft_strequ(opt->length, "q"))
-		n = (int*)(va_arg(*ap, u_quad_t*));
+		*(va_arg(*ap, u_quad_t*)) = out->length;
 	else
-		n = (int*)(va_arg(*ap, unsigned int*));
-	*n = out->length;
+		*(va_arg(*ap, unsigned int*)) = out->length;
 }

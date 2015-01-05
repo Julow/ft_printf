@@ -6,19 +6,20 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:59:10 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/27 11:59:10 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/05 15:51:21 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
 t_meta			g_metas[] = {
-	{"reset", "\033[0;0m"},
-	{"eoc", "\033[39m"},
-	{"eobg", "\033[49m"},
 /*
 ** Text formats
 */
+	{"reset", "\033[0;0m"},
+	{"eoc", "\033[39m"},
+	{"eobg", "\033[49m"},
+
 	{"bold", "\033[1m"},
 	{"dim", "\033[2m"},
 	{"underline", "\033[4m"},
@@ -95,5 +96,6 @@ int				parse_meta(t_string *out, const char *format)
 			return (length + 1);
 		}
 	}
+	ft_stringaddc(out, '{');
 	return (0);
 }
