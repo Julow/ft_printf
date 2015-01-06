@@ -6,20 +6,19 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:59:10 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/05 15:51:21 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 13:19:12 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
 t_meta			g_metas[] = {
-/*
-** Text formats
-*/
 	{"reset", "\033[0;0m"},
 	{"eoc", "\033[39m"},
 	{"eobg", "\033[49m"},
-
+/*
+** Text formats
+*/
 	{"bold", "\033[1m"},
 	{"dim", "\033[2m"},
 	{"underline", "\033[4m"},

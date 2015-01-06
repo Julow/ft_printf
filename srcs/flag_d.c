@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 16:24:17 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 12:18:43 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 12:28:22 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void			flag_d(t_string *out, t_opt *opt, va_list *ap)
 	nb = (opt->format->name == 'D') ? (t_long)(va_arg(*ap, long int)) :
 		get_arg(opt, ap);
 	i = len - 1;
-	if (nb == 0)
+	if (nb == 0 && (!opt->preci_set || opt->preci != 0))
 		str[i--] = '0';
 	else
 		i = add_long(str, i, nb, opt);

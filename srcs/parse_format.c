@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:29:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 11:17:14 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 13:20:14 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ static int		parse_precision(t_opt *opt, const char *format, va_list *ap)
 	int				length;
 
 	if (*format != '.')
-		return (opt->preci_set = FALSE, opt->preci = 0, 0);
+		return (opt->preci_set = FALSE,
+		opt->preci = 0, 0);
 	length = 1;
 	while (format[length] == '.')
 		length++;
@@ -123,7 +124,8 @@ static int		parse_precision(t_opt *opt, const char *format, va_list *ap)
 	{
 		while (format[length] == '-')
 			length++;
-		opt->preci = ft_atoi(format + length - ((format[length - 1] == '-') ? 1 : 0));
+		opt->preci = ft_atoi(format + length - ((format[length - 1] == '-')
+			? 1 : 0));
 		while (ft_isdigit(format[length]))
 			length++;
 	}

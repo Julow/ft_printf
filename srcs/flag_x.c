@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 18:13:26 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/28 18:13:27 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 12:32:59 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ void			flag_x(t_string *out, t_opt *opt, va_list *ap)
 	t_string		tmp;
 
 	x = get_unsigned_arg(opt, ap);
+	if (x == 0 && opt->preci_set && opt->preci == 0)
+	{
+		add_string(out, "", 0, opt);
+		return ;
+	}
 	if (opt->format->name == 'x')
 		hex = ft_itobase(x, "0123456789abcdef");
 	else

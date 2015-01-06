@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 18:39:19 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 11:44:01 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 12:34:39 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%.-5s", "test lol");
 	TEST("%+.-5s", "test lol");
 	TEST("%.0s", "");
+	TEST("{%.*s}", -5, "42");
 	TEST("%0-15s", "test");
 	TEST("%15.5s", "test test");
 	TEST("%-15.5s", "test test");
@@ -53,8 +54,14 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("-20 = %i;", -20);
 	TEST("20 = %i;", 20);
 	TEST("%D", 0);
+	TEST("{%3*d}", 0, 0);
 	TEST("{%09d}", -887);
 	TEST("{%0-4d}", -5);
+	TEST("%.d, %.0d", 0, 0);
+	TEST("%.*d", -5, 0);
+	TEST("%+-5.0d", 0);
+	TEST("%+-5.0d", 5);
+	TEST("%.*d, %.2d", 1, 900, 4488);
 	TEST("%zd", 0);
 	TEST("%zd", 50);
 	TEST("%zd", 190);
@@ -95,6 +102,7 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%O", -885);
 	TEST("%#+O", -15008);
 	TEST("%#-5O", 8);
+	TEST("%.4o", 42);
 	TEST("%#O", 0);
 	TEST("%#+O", 0);
 	TEST("%#; ;+;-';0;s", "--- u/U ---");
@@ -112,9 +120,13 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%#Us", 28789323991);
 	TEST("%+uus", -68416454563);
 	TEST("%#; ;+;-';0;s", "--- x/X ---");
+	TEST("%.0x, %.x", 0, 0);
+	TEST("%-5.0x, %+10.x", 0, 0);
+	TEST("%.0x, %.x", 5, 12);
 	TEST("%#; ;+;-';0;s", "--- c/C ---");
 	TEST("%c", 'c');
 	TEST("%.-1c", 'c');
+	TEST("{%03c}", 0);
 	TEST("%.--1c", 'c');
 	TEST("%c %c", 'F', 'Q');
 	TEST("%C %C", 'f', 'q');
@@ -134,6 +146,7 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%#; ;+;-';0;s", "---- p ----");
 	TEST("%p", p);
 	TEST("NULL = %p", NULL);
+	TEST("%.0p, %.p", NULL, NULL);
 	TEST("ll %p", (unsigned long long int)p);
 	TEST("ll %p", ((unsigned long long int)p) * 10);
 	TEST("%#; ;+;-';0;s", "--- e/E ---");

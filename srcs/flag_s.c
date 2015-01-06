@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 13:11:08 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/05 17:56:24 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 13:18:46 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ static void		flag_ws(t_string *out, t_opt *opt, wchar_t *wstr)
 {
 	const int		len = ft_wstrlen(wstr);
 	char			str[len + 1];
-	int				length = len;
+	int				length;
 
+	length = len;
 	if (wstr == NULL)
 	{
 		add_string(out, "(null)", 6, opt);
