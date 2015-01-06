@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 18:39:19 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 12:34:39 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 13:37:28 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%.4u", 5);
 	TEST("%.4u", 0);
 	TEST("%.8u", 16);
+	TEST("%.u, %.0u", 0, 0);
 	TEST("% u", 0);
 	TEST("%+u", 0);
 	TEST(">>%u<<", 3000000000);
@@ -126,7 +127,9 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%#; ;+;-';0;s", "--- c/C ---");
 	TEST("%c", 'c');
 	TEST("%.-1c", 'c');
+	TEST("{%0.3c}", 0);
 	TEST("{%03c}", 0);
+	TEST("{%0-3c}", 0);
 	TEST("%.--1c", 'c');
 	TEST("%c %c", 'F', 'Q');
 	TEST("%C %C", 'f', 'q');

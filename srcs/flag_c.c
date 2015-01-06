@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 15:27:34 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 13:17:30 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 13:38:06 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,17 @@
 
 void			flag_c(t_string *out, t_opt *opt, va_list *ap)
 {
-	char			c;
+	const int		len = MAX(opt->width, 1);
+	int				i;
+	char			c[len];
 
+	i = len - 1;
 	if (opt->format->name == 'C' || ft_strequ(opt->length, "l"))
-		c = (char)((t_uchar)((t_uint)va_arg(*ap, wint_t)));
+		c[i--] = (char)((t_uchar)((t_uint)va_arg(*ap, wint_t)));
 	else
-		c = (char)va_arg(*ap, int);
-	add_string(out, &c, 1, opt);
+		c[i--] = (char)va_arg(*ap, int);
+	if (HASF('0') && !HASF('-') && opt->width > 0)
+		while ((len - i - 1) < opt->width)
+			c[i--] = '0';
+	add_string(out, c + 1 + i, len - 1 - i, opt);
 }

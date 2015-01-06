@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 18:09:04 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 12:21:18 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 13:32:37 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void			flag_u(t_string *out, t_opt *opt, va_list *ap)
 	nb = (opt->format->name == 'U') ? (t_ulong)(va_arg(*ap, unsigned long)) :
 		get_unsigned_arg(opt, ap);
 	i = len - 1;
-	if (nb == 0)
+	if (nb == 0 && (!opt->preci_set || opt->preci != 0))
 		str[i--] = '0';
 	else
 		i = add_ulong(str, i, nb, opt);
