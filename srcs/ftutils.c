@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/05 17:08:10 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/05 17:56:37 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 11:03:22 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,30 @@ t_uint			ft_strtrim2(char *str, t_uint len, const char *trim)
 		i--;
 	ft_bzero(str + i + 1, len - i);
 	return (i + 1);
+}
+
+void			ft_stringaddupper(t_string *str, const char *add, int len)
+{
+	ft_stringext(str, len);
+	len += str->length;
+	while (str->length < len)
+	{
+		str->content[str->length++] = (*add >= 'a' && *add <= 'z')
+			? *add - 32 : *add;
+		add++;
+	}
+}
+
+void			ft_stringaddlower(t_string *str, const char *add, int len)
+{
+	ft_stringext(str, len);
+	len += str->length;
+	while (str->length < len)
+	{
+		str->content[str->length++] = (*add >= 'A' && *add <= 'Z')
+			? *add + 32 : *add;
+		add++;
+	}
 }
 
 int				ft_atoin(const char *str, int len)

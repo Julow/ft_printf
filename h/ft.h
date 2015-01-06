@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:23:37 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/05 17:56:45 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 11:39:30 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,14 @@ int				parse_meta(t_string *out, const char *format);
 */
 void			add_nchar(t_string *out, char c, int len, t_opt *opt);
 t_uint			ft_strtrim2(char *str, t_uint len, const char *trim);
+void			ft_stringaddupper(t_string *str, const char *add, int len);
+void			ft_stringaddlower(t_string *str, const char *add, int len);
 int				ft_atoin(const char *str, int len);;
 
 /*
 ** utils.c
 */
 void			add_string(t_string *out, const char *add, int len, t_opt *opt);
-void			add_long(t_string *out, t_long add, t_opt *opt);
 t_bool			is_separator(char c);
 void			clear_dis(t_opt *opt);
 

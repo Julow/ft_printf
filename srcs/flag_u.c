@@ -6,37 +6,45 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 18:09:04 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/28 18:09:05 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 12:21:18 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-static void		add_ulong(t_string *out, t_ulong add, t_opt *opt)
+static int		add_ulong(char *str, int i, t_ulong nb, t_opt *opt)
 {
-	int				i;
-	char			str[LONG_BUFF];
+	const int		len = i;
 
-	i = LONG_BUFF;
-	if (add == 0)
-		str[--i] = '0';
-	while (i-- > 0 && add != 0)
+	while (i > 0 && nb != 0)
 	{
-		str[i] = '0' + add % 10;
-		if (((LONG_BUFF - i + 1) % 4) == 0 && HASF('\''))
-			str[--i] = ' ';
-		add /= 10;
+		str[i--] = '0' + (nb % 10);
+		if (((len - i + 1) % 4) == 0 && HASF('\''))
+			str[i--] = ' ';
+		nb /= 10;
 	}
-	add_string(out, str + i + 1, LONG_BUFF - i - 1, opt);
+	return (i);
 }
 
 void			flag_u(t_string *out, t_opt *opt, va_list *ap)
 {
-	t_ulong			u;
+	const int		len = MAX(LONG_BUFF, MAX(opt->width, opt->preci));
+	char			str[len];
+	int				i;
+	t_long			nb;
 
-	if (opt->format->name == 'U')
-		u = (t_ulong)(va_arg(*ap, unsigned long));
+	nb = (opt->format->name == 'U') ? (t_ulong)(va_arg(*ap, unsigned long)) :
+		get_unsigned_arg(opt, ap);
+	i = len - 1;
+	if (nb == 0)
+		str[i--] = '0';
 	else
-		u = get_unsigned_arg(opt, ap);
-	add_ulong(out, u, opt);
+		i = add_ulong(str, i, nb, opt);
+	if (HASF('0') && !HASF('-') && opt->width > 0)
+		while ((len - i - 1) < ((nb < 0) ? opt->width - 1 : opt->width))
+			str[i--] = '0';
+	else if (opt->preci_set && opt->preci > 0)
+		while ((len - i - 1) < opt->preci)
+			str[i--] = '0';
+	add_string(out, str + 1 + i, len - 1 - i, opt);
 }

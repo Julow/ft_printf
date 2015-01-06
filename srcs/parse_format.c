@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:29:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/05 18:10:21 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 11:17:14 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*
 ** sSdDioOuUxXcCnpeEfFbBrRgG
 ** %%
-** 0, ,-,+,#,^,',>,m,M,T
+** 0, ,-,+,#,^,',>,m,M
 ** width,*
 ** precision,*
 ** hh,h,ll,l,L,j,t,z,q
@@ -28,28 +28,28 @@
 */
 t_format		g_formats[] = {
 	{'%', &flag_percent, "0"},
-	{'s', &flag_s, "0 "},
-	{'S', &flag_s, "0 "},
+	{'s', &flag_s, "0"},
+	{'S', &flag_s, "0"},
 	{'d', &flag_d, ""},
 	{'D', &flag_d, ""},
 	{'i', &flag_d, ""},
-	{'o', &flag_o, "+ "},
-	{'O', &flag_o, "+ "},
-	{'u', &flag_u, "+ "},
-	{'U', &flag_u, "+ "},
-	{'x', &flag_x, "+ "},
-	{'X', &flag_x, "+ "},
-	{'c', &flag_c, " "},
-	{'C', &flag_c, " "},
+	{'o', &flag_o, "+"},
+	{'O', &flag_o, "+"},
+	{'u', &flag_u, "+"},
+	{'U', &flag_u, "+"},
+	{'x', &flag_x, "+"},
+	{'X', &flag_x, "+"},
+	{'c', &flag_c, ""},
+	{'C', &flag_c, ""},
 	{'n', &flag_n, ""},
-	{'p', &flag_p, " "},
+	{'p', &flag_p, ""},
 	{'e', &flag_e, ""},
 	{'E', &flag_e, ""},
 	{'f', &flag_f, ""},
 	{'F', &flag_f, ""},
-	{'b', &flag_b, "+ "},
-	{'B', &flag_b, "+ "},
-	{'r', &flag_r, "+ "},
+	{'b', &flag_b, "+"},
+	{'B', &flag_b, "+"},
+	{'r', &flag_r, "+"},
 	{'g', &flag_g, ""},
 	{'G', &flag_g, ""},
 	{'\0', NULL, NULL}
@@ -79,7 +79,7 @@ static int		parse_flags(t_opt *opt, const char *format)
 	while (format[i] == '#' || format[i] == ' ' || format[i] == '0'
 		|| format[i] == '-' || format[i] == '+' || format[i] == '\''
 		|| format[i] == '^' || format[i] == '>' || format[i] == 'm'
-		|| format[i] == 'M' || format[i] == 'T' || is_separator(format[i]))
+		|| format[i] == 'M' || is_separator(format[i]))
 		i++;
 	opt->flags = ft_strsub(format, 0, i);
 	return (i);
