@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:23:37 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 11:39:30 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 13:55:09 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int				ft_atoin(const char *str, int len);;
 ** utils.c
 */
 void			add_string(t_string *out, const char *add, int len, t_opt *opt);
+void			pad_preci(t_string *str, int start, t_opt *opt);
 t_bool			is_separator(char c);
 void			clear_dis(t_opt *opt);
 

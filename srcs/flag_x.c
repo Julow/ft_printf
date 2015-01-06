@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 18:13:26 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 12:32:59 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 14:05:34 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,12 @@ void			flag_x(t_string *out, t_opt *opt, va_list *ap)
 		hex = ft_itobase(x, "0123456789abcdef");
 	else
 		hex = ft_itobase(x, "0123456789ABCDEF");
+	ft_stringini(&tmp);
 	if (ft_strchr(opt->flags, '#') && x > 0)
-	{
-		ft_stringini(&tmp);
 		ft_stringadd(&tmp, (opt->format->name == 'x') ? "0x" : "0X");
-		ft_stringadd(&tmp, hex);
-		add_string(out, tmp.content, tmp.length, opt);
-		free(tmp.content);
-	}
-	else
-		add_string(out, hex, ft_strlen(hex), opt);
+	ft_stringadd(&tmp, hex);
+	pad_preci(&tmp, (ft_strchr(opt->flags, '#') && x > 0) ? 2 : 0, opt);
+	add_string(out, tmp.content, tmp.length, opt);
+	free(tmp.content);
 	free(hex);
 }

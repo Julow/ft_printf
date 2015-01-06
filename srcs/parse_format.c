@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:29:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 13:20:14 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 14:08:15 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static int		parse_width(t_opt *opt, const char *format, va_list *ap)
 		length++;
 	if (length > 0)
 		opt->width = ft_atoin(format, length);
-	else if (format[0] == '*')
+	if (format[length] == '*')
 	{
 		opt->width = (int)(va_arg(*ap, int));
 		length++;

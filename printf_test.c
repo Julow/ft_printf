@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 18:39:19 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 13:37:28 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 14:09:03 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%+.-5s", "test lol");
 	TEST("%.0s", "");
 	TEST("{%.*s}", -5, "42");
+	TEST("{%.*s}", -1, "42");
 	TEST("%0-15s", "test");
 	TEST("%15.5s", "test test");
 	TEST("%-15.5s", "test test");
@@ -102,6 +103,8 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%O", -885);
 	TEST("%#+O", -15008);
 	TEST("%#-5O", 8);
+	TEST("%#.o, %#.0o", 0, 0);
+	TEST("%.o, %.0o", 0, 0);
 	TEST("%.4o", 42);
 	TEST("%#O", 0);
 	TEST("%#+O", 0);
@@ -124,6 +127,12 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%.0x, %.x", 0, 0);
 	TEST("%-5.0x, %+10.x", 0, 0);
 	TEST("%.0x, %.x", 5, 12);
+	TEST("%#.x, %#.0x", 0, 0);
+	TEST("%.5x", NULL);
+	TEST("%.5x", 86415211);
+	TEST("%.20x", 28789323991);
+	TEST("%.-5x", 5);
+	TEST("%.-20x", 6541);
 	TEST("%#; ;+;-';0;s", "--- c/C ---");
 	TEST("%c", 'c');
 	TEST("%.-1c", 'c');
@@ -150,6 +159,11 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%p", p);
 	TEST("NULL = %p", NULL);
 	TEST("%.0p, %.p", NULL, NULL);
+	TEST("%.5p", NULL);
+	TEST("%.5p", p);
+	TEST("%.20p", p);
+	TEST("%.-5p", p);
+	TEST("%.-20p", p);
 	TEST("ll %p", (unsigned long long int)p);
 	TEST("ll %p", ((unsigned long long int)p) * 10);
 	TEST("%#; ;+;-';0;s", "--- e/E ---");

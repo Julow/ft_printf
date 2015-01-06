@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/26 19:47:13 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 11:39:12 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 13:55:55 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ void			add_string(t_string *out, const char *add, int len, t_opt *opt)
 	if (left != NULL || opt->width < 0 || center != NULL)
 		ft_stringaddcn(out, ' ', ((center != NULL) ? (ABS(opt->width) - len)
 			/ 2 : ABS(opt->width) - len));
+}
+
+void			pad_preci(t_string *str, int start, t_opt *opt)
+{
+	while (str->length < opt->preci + start)
+		ft_stringinsc(str, '0', start);
+	while (str->length < -opt->preci)
+		ft_stringaddc(str, ' ');
 }
 
 t_bool			is_separator(char c)
