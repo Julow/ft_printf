@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 18:39:19 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 14:09:03 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/07 11:05:45 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%.-0s", "test test test");
 	TEST("%.-1s", "test lol");
 	TEST("%.-5s", "test lol");
+	TEST("{%05.s}", NULL);
 	TEST("%+.-5s", "test lol");
 	TEST("%.0s", "");
 	TEST("{%.*s}", -5, "42");
@@ -57,6 +58,13 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%D", 0);
 	TEST("{%3*d}", 0, 0);
 	TEST("{%09d}", -887);
+	TEST("{%+03d}", 0);
+	TEST("{%+03d}", 5);
+	TEST("{%03d}", 5);
+	TEST("{% 03d}", 5);
+	TEST("{%03.2d}", 0);
+	TEST("{%03.2d}", 5);
+	TEST("{%03.2d}", -5);
 	TEST("{%0-4d}", -5);
 	TEST("%.d, %.0d", 0, 0);
 	TEST("%.*d", -5, 0);
