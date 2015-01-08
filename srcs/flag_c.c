@@ -6,11 +6,22 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 15:27:34 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/08 17:26:23 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/08 22:31:59 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
+
+static int		push_wide(char *buff, int i, wchar_t w)
+{
+	char			tmp[4];
+	int				len;
+
+	len = ft_widetoa(tmp, w);
+	i -= len;
+	ft_memcpy(buff + i + 1, tmp, len);
+	return (i);
+}
 
 void			flag_c(t_string *out, t_opt *opt, va_list *ap)
 {
@@ -20,7 +31,7 @@ void			flag_c(t_string *out, t_opt *opt, va_list *ap)
 
 	i = len - 1;
 	if (opt->format->name == 'C' || ft_strequ(opt->length, "l"))
-		i -= ft_widetoa(c, (wchar_t)va_arg(*ap, wint_t));
+		i = push_wide(c, i, (wchar_t)va_arg(*ap, wint_t));
 	else
 		c[i--] = (char)va_arg(*ap, int);
 	if (HASF('0') && !HASF('-') && opt->width > 0)

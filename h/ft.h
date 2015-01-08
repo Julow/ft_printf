@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:23:37 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/08 17:25:44 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/08 22:14:11 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ int				ft_strunlen(char *str, int len);
 ** wutils.c
 */
 t_uint			ft_wstrlen(wchar_t *wstr);
-int				ft_strutf8(char *buff, wchar_t *wstr);
-int				ft_strnutf8(char *buff, wchar_t *wstr, int n);
+int				ft_wstrconv(char *buff, wchar_t *wstr);
+int				ft_wstrnconv(char *buff, wchar_t *wstr, int n);
 int				ft_widetoa(char *buff, wchar_t w);
 
 /*

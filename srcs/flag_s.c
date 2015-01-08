@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 13:11:08 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/08 17:17:49 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/08 22:17:18 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,8 @@ static void		flag_ws(t_string *out, t_opt *opt, wchar_t *wstr)
 		add_string(out, "(null)", 6, opt);
 		return ;
 	}
-	if (opt->preci_set && len > opt->preci)
-		length = ft_strnutf8(str, wstr, opt->preci);
-	else
-		length = ft_strutf8(str, wstr);
-/**/
-	ft_putlstr_fd(str, length, 2);
-	ft_putchar('\n');
-	ft_putlstr_fd(str, ft_wstrlen(wstr) * 4, 2);
-	ft_putchar('\n');
-/**/
+	length = ft_wstrnconv(str, wstr,
+		(opt->preci_set && len > opt->preci) ? opt->preci : len);
 	if (opt->preci_set && opt->preci < 0)
 		add_nchar(out, ' ', ABS(length), opt);
 	else
