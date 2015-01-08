@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 17:45:40 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/02 18:37:54 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/08 17:27:09 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,57 @@ t_uint			ft_wstrlen(wchar_t *wstr)
 	return (i);
 }
 
-void			compress_wstr(char *dst, wchar_t *src)
+int				ft_strutf8(char *buff, wchar_t *wstr)
 {
-	while (*src != '\0')
+	int				i;
+	int				len;
+
+	len = 0;
+	i = -1;
+	while (wstr[++i] != 0)
+		len += ft_widetoa(buff + (i * 4), wstr[i]);
+	return (len + 1);
+}
+
+int				ft_strnutf8(char *buff, wchar_t *wstr, int n)
+{
+	int				i;
+	int				len;
+
+	len = 0;
+	i = -1;
+	while (wstr[++i] != 0 && (i * 4) < n)
+		len += ft_widetoa(buff + (i * 4), wstr[i]);
+	return (len + 1);
+}
+
+int				ft_widetoa(char *buff, wchar_t w)
+{
+	if (w < 0x80)
 	{
-		*((t_byte*)dst) = *((t_byte*)src);
-		src++;
-		dst++;
+		*(buff++) = (((w >> 0) & 0x7F) | 0);
+		return (1);
 	}
-	*dst = '\0';
+	else if (w < 0x800)
+	{
+		*(buff++) = ((w >> 6) & 0x1F) | 0xC0;
+		*(buff++) = ((w >> 0) & 0x3F) | 0x80;
+		return (2);
+	}
+	else if (w < 0x10000)
+	{
+		*(buff++) = ((w >> 12) & 0xF) | 0xE0;
+		*(buff++) = ((w >> 6) & 0x1F) | 0x80;
+		*(buff++) = ((w >> 0) & 0x3F) | 0x80;
+		return (3);
+	}
+	else if (w < 0x110000)
+	{
+		*(buff++) = ((w >> 18) & 0x7) | 0xF0;
+		*(buff++) = ((w >> 12) & 0x3F) | 0x80;
+		*(buff++) = ((w >> 6) & 0x3F) | 0x80;
+		*(buff++) = ((w >> 0) & 0x3F) | 0x80;
+		return (4);
+	}
+	return (0);
 }

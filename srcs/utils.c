@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/26 19:47:13 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 13:55:55 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/08 16:53:36 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,11 @@ void			clear_dis(t_opt *opt)
 	while (opt->flags[++i] != '\0')
 		if (ft_strchr(opt->format->disabled, opt->flags[i]))
 			opt->flags[i] = ';';
+}
+
+int				ft_strunlen(char *str, int len)
+{
+	while (str[--len] == '\0')
+		continue;
+	return (len + 1);
 }

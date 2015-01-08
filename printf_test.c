@@ -6,12 +6,13 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 18:39:19 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/07 11:05:45 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/08 16:47:27 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
+#include <locale.h>
 #include <math.h>
 
 #define TEST(s, ...)	printf("\033[36m%s :\033[0m ", s);fflush(stdout);printf(" \033[36m;\033[0m %d\n", _printf(s, ##__VA_ARGS__));fflush(stdout);
@@ -40,6 +41,9 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%.8s", "test test test");
 	TEST("%.0s", "test test test");
 	TEST("%.-0s", "test test test");
+	TEST("%S", L"米");
+	TEST("%.4S", L"我是一只猫。");
+	TEST("%S", L"我是一只猫。");
 	TEST("%.-1s", "test lol");
 	TEST("%.-5s", "test lol");
 	TEST("{%05.s}", NULL);
@@ -229,6 +233,7 @@ static void		test(int (*_printf)(const char *format, ...))
 
 int				main(int argc, char **argv)
 {
+	setlocale(LC_ALL, "en_US.UTF-8");
 	if (argc > 1)
 	{
 		printf("\033[34mTest: %s\033[0m\n", "printf");

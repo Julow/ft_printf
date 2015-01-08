@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:23:37 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 13:55:09 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/08 17:25:44 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,15 @@ void			add_string(t_string *out, const char *add, int len, t_opt *opt);
 void			pad_preci(t_string *str, int start, t_opt *opt);
 t_bool			is_separator(char c);
 void			clear_dis(t_opt *opt);
+int				ft_strunlen(char *str, int len);
 
 /*
 ** wutils.c
 */
 t_uint			ft_wstrlen(wchar_t *wstr);
-void			compress_wstr(char *dst, wchar_t *src);
+int				ft_strutf8(char *buff, wchar_t *wstr);
+int				ft_strnutf8(char *buff, wchar_t *wstr, int n);
+int				ft_widetoa(char *buff, wchar_t w);
 
 /*
 ** argsutils.c
