@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 11:52:52 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/02 16:25:42 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/06 13:24:51 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,9 +253,9 @@ t_uint			ft_strlcat(char *dst, const char *src, t_uint size);
 void			ft_strdel(char **as);
 void			ft_strclr(char *s);
 void			ft_striter(char *s, void (*f)(char*));
-void			ft_striteri(char *s, void (*f)(t_uint, char*));
+void			ft_striteri(char *s, void (*f)(int, char*));
 char			*ft_strmap(const char *s, char (*f)(char));
-char			*ft_strmapi(const char *s, char (*f)(t_uint, char));
+char			*ft_strmapi(const char *s, char (*f)(int, char));
 
 /*
 ** Conversion
@@ -401,13 +401,14 @@ int				ft_stringputfd(t_string *str, int const fd);
 ** Math
 */
 int				ft_mix(int a, int b, t_big pos);
+int				ft_max(int a, int b);
+
+void			ft_resalpha(t_color *c, t_color bg);
+void			ft_resrect(t_rect *rect, t_rect bounds);
 
 /*
 ** Draw on struct s_image (t_image)
 */
-void			ft_resalpha(t_color *c, t_color bg);
-void			ft_resrect(t_rect *rect, t_rect bounds);
-
 t_color			ft_imagept(t_image *img, t_pt pt);
 t_color			ft_imagepos(t_image *img, int pos);
 void			ft_imageput(t_image *img, int pos, t_color color);
@@ -430,5 +431,10 @@ void			ft_drawcircle(t_image *img, t_pt o, int radius, t_color color);
 void			ft_drawcirclef(t_image *img, t_pt o, int radius, t_color color);
 void			ft_drawtri(t_image *img, t_pt pts[3], t_color color);
 void			ft_drawtrif(t_image *img, t_pt pts[3], t_color color);
+
+/*
+** get_next_line
+*/
+int				get_next_line(int const fd, char **line);
 
 #endif

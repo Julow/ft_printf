@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 14:26:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 13:24:18 by jaguillo         ###   ########.fr       */
+/*   Created: 2015/01/04 23:29:03 by jaguillo          #+#    #+#             */
+/*   Updated: 2015/01/04 23:29:26 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			ft_striteri(char *s, void (*f)(int, char*))
+int				ft_max(int a, int b)
 {
-	int				i;
-
-	i = 0;
-	while (s != NULL && f != NULL && s[i] != '\0')
-	{
-		f(i, s + i);
-		i++;
-	}
+	return ((a > b) ? a : b);
 }
