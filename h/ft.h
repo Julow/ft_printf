@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:23:37 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/09 09:20:25 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/09 09:26:58 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct	s_meta
 /*
 ** parser.c
 */
-void			parsef(t_string *out, char *format, va_list *ap);
+void			parsef(t_string *out, const char *format, va_list *ap);
 
 /*
 ** parse_format.c

@@ -6,13 +6,13 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 09:19:49 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/09 09:20:05 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/09 09:26:55 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-void			parsef(t_string *out, char *format, va_list *ap)
+void			parsef(t_string *out, const char *format, va_list *ap)
 {
 	int				i;
 
