@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 18:09:04 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 13:32:37 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/09 08:31:52 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,21 @@ void			flag_u(t_string *out, t_opt *opt, va_list *ap)
 	const int		len = MAX(LONG_BUFF, MAX(opt->width, opt->preci));
 	char			str[len];
 	int				i;
-	t_long			nb;
+	int				pad;
+	t_ulong			nb;
 
-	nb = (opt->format->name == 'U') ? (t_ulong)(va_arg(*ap, unsigned long)) :
-		get_unsigned_arg(opt, ap);
+	nb = (opt->format->name != 'U') ? get_unsigned_arg(opt, ap) :
+		(t_ulong)(va_arg(*ap, unsigned long int));
 	i = len - 1;
 	if (nb == 0 && (!opt->preci_set || opt->preci != 0))
 		str[i--] = '0';
 	else
 		i = add_ulong(str, i, nb, opt);
-	if (HASF('0') && !HASF('-') && opt->width > 0)
-		while ((len - i - 1) < ((nb < 0) ? opt->width - 1 : opt->width))
+	pad = ((opt->preci_set) ? MIN(opt->width, opt->preci) : opt->width) + 1;
+	if (HASF('0'))
+		while ((len - i) < pad)
 			str[i--] = '0';
-	else if (opt->preci_set && opt->preci > 0)
+	if (opt->preci_set)
 		while ((len - i - 1) < opt->preci)
 			str[i--] = '0';
 	add_string(out, str + 1 + i, len - 1 - i, opt);

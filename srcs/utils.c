@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/26 19:47:13 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/08 16:53:36 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/09 08:49:18 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,19 @@ void			add_string(t_string *out, const char *add, int len, t_opt *opt)
 			/ 2 : ABS(opt->width) - len));
 }
 
+void			add_nchar(t_string *out, char c, int len, t_opt *opt)
+{
+	char			str[len];
+
+	ft_memset(str, c, len);
+	add_string(out, str, len, opt);
+}
+
 void			pad_preci(t_string *str, int start, t_opt *opt)
 {
+	if (HASF('0') && !HASF('-'))
+		while (str->length < opt->width)
+			ft_stringinsc(str, '0', start);
 	while (str->length < opt->preci + start)
 		ft_stringinsc(str, '0', start);
 	while (str->length < -opt->preci)
@@ -61,11 +72,4 @@ void			clear_dis(t_opt *opt)
 	while (opt->flags[++i] != '\0')
 		if (ft_strchr(opt->format->disabled, opt->flags[i]))
 			opt->flags[i] = ';';
-}
-
-int				ft_strunlen(char *str, int len)
-{
-	while (str[--len] == '\0')
-		continue;
-	return (len + 1);
 }

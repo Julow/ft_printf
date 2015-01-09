@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 16:24:17 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/07 11:04:36 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/09 08:27:50 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,21 @@ void			flag_d(t_string *out, t_opt *opt, va_list *ap)
 	const int		len = MAX(LONG_BUFF, MAX(opt->width, opt->preci));
 	char			str[len];
 	int				i;
+	int				pad;
 	t_long			nb;
-	t_bool			negative;
 
-	nb = (opt->format->name == 'D') ? (t_long)(va_arg(*ap, long int)) :
-		get_arg(opt, ap);
-	negative = (nb < 0 || HASF('+') || HASF(' ')) ? TRUE : FALSE;
-	i = len - 1;
-	if (nb == 0 && (!opt->preci_set || opt->preci != 0))
-		str[i--] = '0';
+	if ((nb = (opt->format->name == 'D') ? (t_long)(va_arg(*ap, long int)) :
+		get_arg(opt, ap)) == 0 && (!opt->preci_set || opt->preci != 0))
+		str[(i = len - 2) + 1] = '0';
 	else
-		i = add_long(str, i, nb, opt);
-	if (HASF('0') && !HASF('-') && opt->width > 0)
-		while ((len - i - 1) < (negative ? opt->width - 1 : opt->width))
+		i = add_long(str, len - 1, nb, opt);
+	pad = ((opt->preci_set) ? MIN(opt->width, opt->preci) : opt->width) + 1;
+	if ((nb < 0 || HASF('+') || HASF(' ')) && !opt->preci_set)
+		pad--;
+	if (HASF('0') && !HASF('-'))
+		while ((len - i) < pad)
 			str[i--] = '0';
-	else if (opt->preci_set && opt->preci > 0)
+	if (opt->preci_set)
 		while ((len - i - 1) < opt->preci)
 			str[i--] = '0';
 	if (nb < 0 || HASF('+'))

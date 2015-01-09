@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 18:39:19 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/08 16:47:27 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/09 08:51:34 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,51 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%.8s", "test test test");
 	TEST("%.0s", "test test test");
 	TEST("%.-0s", "test test test");
+	TEST("%.*s", -5, "42");
 	TEST("%S", L"米");
 	TEST("%.4S", L"我是一只猫。");
-	TEST("%S", L"我是一只猫。");
+	TEST("%S", L"bonjour");
+	TEST("%S", L"おはよう");
+	TEST("%S", L"buenos días");
+	TEST("%S", L"góðan daginn");
+	TEST("%S", L"সুপ্রভাত");
+	TEST("%S", L"गुड मॉर्निंग");
+	TEST("%S", L"good morning");
+	TEST("%S", L"ਸ਼ੁਭ ਸਵੇਰ");
+	TEST("%S", L"jó reggelt");
+	TEST("%S", L"സുപ്രഭാതം");
+	TEST("%S", L"добро јутро");
+	TEST("%S", L"dobrý den");
+	TEST("%S", L"Śubhōdaya");
+	TEST("%S", L"bon maten");
+	TEST("%S", L"dobrý deň");
+	TEST("%S", L"goedemorgen");
+	TEST("%S", L"jó reggelt");
+	TEST("%S", L"доброе утро");
+	TEST("%S", L"dobroye utro");
+	TEST("%S", L"Śubha savēra");
+	TEST("%S", L"goeie môre");
+	TEST("%S", L"صبح بخیر");
+	TEST("%S", L"ຕອນເຊົ້າທີ່ດີ");
+	TEST("%S", L"صبح به خیر");
+	TEST("%S", L"қайырлы таң");
+	TEST("%S", L"bună dimineața");
+	TEST("%S", L"อรุณสวัสดิ์");
 	TEST("%.-1s", "test lol");
 	TEST("%.-5s", "test lol");
-	TEST("{%05.s}", NULL);
+	TEST("%05.s", NULL);
+	TEST("%05s", NULL);
+	TEST("%02.s", NULL);
+	TEST("%5.s", NULL);
+	TEST("%-5.s", NULL);
+	TEST("%+5.s", NULL);
+	TEST("% 5.s", NULL);
+	TEST("% +05.8s", NULL);
+	TEST("% +05.2s", NULL);
 	TEST("%+.-5s", "test lol");
 	TEST("%.0s", "");
-	TEST("{%.*s}", -5, "42");
-	TEST("{%.*s}", -1, "42");
+	TEST("%.*s", -5, "42");
+	TEST("%.*s", -1, "42");
 	TEST("%0-15s", "test");
 	TEST("%15.5s", "test test");
 	TEST("%-15.5s", "test test");
@@ -64,6 +99,8 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("{%09d}", -887);
 	TEST("{%+03d}", 0);
 	TEST("{%+03d}", 5);
+	TEST("%*3d", 0, 0);
+	TEST("{%03.2d}", 0);
 	TEST("{%03d}", 5);
 	TEST("{% 03d}", 5);
 	TEST("{%03.2d}", 0);
@@ -123,6 +160,9 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%#; ;+;-';0;s", "--- u/U ---");
 	TEST("%u", 5588);
 	TEST("%u", -5588);
+	TEST("%03.2u", 0);
+	TEST("%03.2u", 5);
+	TEST("%03.2u", 123);
 	TEST("%u", 5);
 	TEST("%08u", 16);
 	TEST("%.4u", 5);
@@ -149,8 +189,8 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%c", 'c');
 	TEST("%.-1c", 'c');
 	TEST("{%0.3c}", 0);
-	TEST("{%03c}", 0);
-	TEST("{%0-3c}", 0);
+	TEST("%03c", 0);
+	TEST("%0-3c", 0);
 	TEST("%.--1c", 'c');
 	TEST("%c %c", 'F', 'Q');
 	TEST("%C %C", 'f', 'q');
@@ -174,6 +214,8 @@ static void		test(int (*_printf)(const char *format, ...))
 	TEST("%.5p", NULL);
 	TEST("%.5p", p);
 	TEST("%.20p", p);
+	TEST("{%05p}", 0);
+	TEST("%5p", 0);
 	TEST("%.-5p", p);
 	TEST("%.-20p", p);
 	TEST("ll %p", (unsigned long long int)p);

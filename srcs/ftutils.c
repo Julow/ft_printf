@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/05 17:08:10 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/06 11:03:22 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/09 08:34:32 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,4 @@ int				ft_atoin(const char *str, int len)
 	while (*str >= '0' && *str <= '9' && len-- > 0)
 		nb = nb * 10 + (*(str++) - '0');
 	return (nb * sign);
-}
-
-void			add_nchar(t_string *out, char c, int len, t_opt *opt)
-{
-	char			str[len];
-
-	ft_memset(str, c, len);
-	add_string(out, str, len, opt);
 }
