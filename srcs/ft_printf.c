@@ -6,34 +6,12 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/26 13:34:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/05 16:32:10 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/09 09:19:17 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 #include <stdlib.h>
-
-static void		parsef(t_string *out, char *format, va_list *ap)
-{
-	int				i;
-
-	ft_stringext(out, ft_strlen(format));
-	i = -1;
-	while (++i >= 0)
-	{
-		if (format[i] == '%' || format[i] == '{' || format[i] == '\0')
-		{
-			if (format[i] == '\0')
-				break ;
-			else if (format[i] == '%')
-				i += parse_format(out, format + i + 1, ap);
-			else if (format[i] == '{')
-				i += parse_meta(out, format + i + 1);
-		}
-		else
-			ft_stringaddc(out, format[i]);
-	}
-}
 
 t_string		*ft_stringf(const char *format, ...)
 {

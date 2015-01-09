@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 11:23:37 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/09 08:34:22 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/09 09:20:25 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,20 @@
 
 # define LONG_BUFF	(40)
 
+typedef struct	s_ldouble_bits
+{
+	t_ulong			fract:64;
+	t_uint			e:15;
+	t_bool			sign:1;
+}				t_ldouble_bits;
+
 typedef union	u_ldouble
 {
-	struct
-	{
-		t_ulong			fract:64;
-		t_uint			e:15;
-		t_bool			sign:1;
-	}				b;
+	t_ldouble_bits	b;
 	long double		d;
 }				t_ldouble;
 
-# define EXP(d)		(((t_ldouble)(d)).b.e)
+# define EXP(d)		((((t_ldouble)(d)).b).e)
 
 typedef struct	s_format
 {
@@ -59,6 +61,11 @@ typedef struct	s_meta
 }				t_meta;
 
 /*
+** parser.c
+*/
+void			parsef(t_string *out, char *format, va_list *ap);
+
+/*
 ** parse_format.c
 */
 int				parse_format(t_string *out, const char *format, va_list *ap);
@@ -71,10 +78,9 @@ int				parse_meta(t_string *out, const char *format);
 /*
 ** ftutils.c
 */
-t_uint			ft_strtrim2(char *str, t_uint len, const char *trim);
 void			ft_stringaddupper(t_string *str, const char *add, int len);
 void			ft_stringaddlower(t_string *str, const char *add, int len);
-int				ft_atoin(const char *str, int len);;
+int				ft_atoin(const char *str, int len);
 
 /*
 ** utils.c

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/27 16:24:17 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/09 08:27:50 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/09 09:09:14 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ void			flag_d(t_string *out, t_opt *opt, va_list *ap)
 	int				pad;
 	t_long			nb;
 
+	i = len - 1;
 	if ((nb = (opt->format->name == 'D') ? (t_long)(va_arg(*ap, long int)) :
 		get_arg(opt, ap)) == 0 && (!opt->preci_set || opt->preci != 0))
-		str[(i = len - 2) + 1] = '0';
+		str[i--] = '0';
 	else
 		i = add_long(str, len - 1, nb, opt);
-	pad = ((opt->preci_set) ? MIN(opt->width, opt->preci) : opt->width) + 1;
-	if ((nb < 0 || HASF('+') || HASF(' ')) && !opt->preci_set)
-		pad--;
+	pad = ((opt->preci_set) ? MIN(opt->width, opt->preci) : opt->width) +
+		(((nb < 0 || HASF('+') || HASF(' ')) && !opt->preci_set) ? 0 : 1);
 	if (HASF('0') && !HASF('-'))
 		while ((len - i) < pad)
 			str[i--] = '0';

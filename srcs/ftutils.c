@@ -6,26 +6,11 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/05 17:08:10 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/09 08:34:32 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/09 09:13:29 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
-
-t_uint			ft_strtrim2(char *str, t_uint len, const char *trim)
-{
-	t_uint			i;
-
-	i = 0;
-	while (ft_strchr(trim, str[i]) != NULL)
-		i++;
-	ft_memmove(str, str + i, len - i);
-	i = len - i - 1;
-	while (ft_strchr(trim, str[i]) != NULL)
-		i--;
-	ft_bzero(str + i + 1, len - i);
-	return (i + 1);
-}
 
 void			ft_stringaddupper(t_string *str, const char *add, int len)
 {
